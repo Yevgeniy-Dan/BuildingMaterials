@@ -1,0 +1,86 @@
+﻿@page
+@model BuildingMaterials.Pages.Suppliers.IndexModel
+
+@{
+    ViewData["Title"] = "Suppliers";
+}
+
+<h1>Поставщики</h1>
+
+<p>
+    <a asp-page="Create">Создать</a>
+</p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Найти по имени:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Поиск" class="btn btn-primary" /> |
+            <a asp-page="./Index">Вернуться к полному списку</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ChiefNameSort" asp-route-currentFilter="@Model.CurrentFilter">@Html.DisplayNameFor(model => model.Suppliers[0].ChiefFullName)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suppliers[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suppliers[0].Phone)
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CompanyNameSort" asp-route-currentFilter="@Model.CurrentFilter">@Html.DisplayNameFor(model => model.Suppliers[0].CompanyName)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Suppliers)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChiefFullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Редактировать</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Подробности</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.Suppliers.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Suppliers.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Suppliers.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Предыдущая
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Suppliers.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Следующая
+</a>

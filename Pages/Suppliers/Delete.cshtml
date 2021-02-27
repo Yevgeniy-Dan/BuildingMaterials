@@ -1,0 +1,48 @@
+﻿@page
+@model BuildingMaterials.Pages.Suppliers.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Удаление</h1>
+
+<p class="text-danger">@Model.ErrorMessage</p>
+
+<h3>Вы уверены, что хотите удалить это?</h3>
+<div>
+    <h4>Поставщик</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Supplier.CompanyName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Supplier.CompanyName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Supplier.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Supplier.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Supplier.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Supplier.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Supplier.ChiefFullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Supplier.ChiefFullName)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Supplier.ID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Вернуться к списку</a>
+    </form>
+</div>

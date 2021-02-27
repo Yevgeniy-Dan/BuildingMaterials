@@ -1,0 +1,64 @@
+﻿@page "{id:int?}"
+@model BuildingMaterials.Pages.Materials.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Редактировать</h1>
+
+<h4>Материал</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Material.ID" />
+            <div class="form-group">
+                <label asp-for="Material.Supplier" class="control-label"></label>
+                <select asp-for="Material.SupplierID" class="form-control" asp-items="@Model.SupplierNameSL">
+                    <option value="">
+                        -- Выбрать поставщика --
+                    </option>
+                </select>
+                <span asp-validation-for="Material.SupplierID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Material.Name" class="control-label"></label>
+                <input asp-for="Material.Name" class="form-control" />
+                <span asp-validation-for="Material.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Material.Manufacturer" class="control-label"></label>
+                <input asp-for="Material.Manufacturer" class="form-control" />
+                <span asp-validation-for="Material.Manufacturer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Material.UnitCost" class="control-label"></label>
+                <input asp-for="Material.UnitCost" class="form-control" />
+                <span asp-validation-for="Material.UnitCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Material.MinimumBatch" class="control-label"></label>
+                <input asp-for="Material.MinimumBatch" class="form-control" />
+                <span asp-validation-for="Material.MinimumBatch" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Material.ShelfLife" class="control-label"></label>
+                <input asp-for="Material.ShelfLife" class="form-control" />
+                <span asp-validation-for="Material.ShelfLife" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

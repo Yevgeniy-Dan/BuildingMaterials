@@ -1,0 +1,55 @@
+﻿@page
+@model BuildingMaterials.Pages.Materials.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Подробности</h1>
+
+<div>
+    <h4>Материал</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.Manufacturer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material.Manufacturer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.UnitCost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material.UnitCost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.MinimumBatch)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material.MinimumBatch)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.ShelfLife)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material.ShelfLife)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.Supplier.ChiefFullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material.Supplier.ChiefFullName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Material.ID">Редактировать</a> |
+    <a asp-page="./Index">Вернуться к списку</a>
+</div>

@@ -1,0 +1,59 @@
+﻿@page
+@model BuildingMaterials.Pages.Orders.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Редактировать</h1>
+
+<h4>Заказы</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Order.ID" />
+            <div class="form-group">
+                <label asp-for="Order.Material" class="control-label"></label>
+                <select asp-for="Order.MaterialID" class="form-control" asp-items="@Model.MaterialNameSL">
+                    <option>
+                        -- Выбрать материал --
+                    </option>
+                </select>
+                <span asp-validation-for="Order.MaterialID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.FillingDate" class="control-label"></label>
+                <input asp-for="Order.FillingDate" class="form-control" />
+                <span asp-validation-for="Order.FillingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.Quantity" class="control-label"></label>
+                <input asp-for="Order.Quantity" class="form-control" />
+                <span asp-validation-for="Order.Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.Unit" class="control-label"></label>
+                <input asp-for="Order.Unit" class="form-control" />
+                <span asp-validation-for="Order.Unit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.DeliveryDate" class="control-label"></label>
+                <input asp-for="Order.DeliveryDate" class="form-control" />
+                <span asp-validation-for="Order.DeliveryDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

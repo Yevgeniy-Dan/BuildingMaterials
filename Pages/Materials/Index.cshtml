@@ -1,0 +1,104 @@
+﻿@page
+@model BuildingMaterials.Pages.Materials.IndexModel
+
+@{
+    ViewData["Title"] = "Materials";
+}
+
+<h1>Материалы</h1>
+
+<p>
+    <a asp-page="Create">Создать</a>
+</p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-action no-color">
+        <p>
+            Найти по имени:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Поиск" class="btn btn-primary" />
+            <a asp-page="./Index">Вернуться к полному списку</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" , asp-route-sortOrder="@Model.NameSort" asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Materials[0].Name)
+                </a>
+
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ManufacterSort" asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Materials[0].Manufacturer)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Materials[0].UnitCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Materials[0].MinimumBatch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Materials[0].ShelfLife)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Materials[0].SupplierID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Materials)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Manufacturer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MinimumBatch)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShelfLife)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier.ChiefFullName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Редактировать</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Подробности</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.Materials.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Materials.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Materials.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Предыдущая
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Materials.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Следующая
+</a>

@@ -1,0 +1,52 @@
+﻿@page
+@model BuildingMaterials.Pages.Materials.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Удалить</h1>
+
+<h3>Вы уверены, что хотите удалить это?</h3>
+<div>
+    <h4>Материал</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.Manufacturer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material.Manufacturer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.UnitCost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material.UnitCost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.MinimumBatch)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material.MinimumBatch)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.ShelfLife)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material.ShelfLife)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Material.ID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Вернуться к списку</a>
+    </form>
+</div>
