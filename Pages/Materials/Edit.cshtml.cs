@@ -53,15 +53,12 @@ namespace BuildingMaterials.Pages.Materials
 
             if (await TryUpdateModelAsync<Material>(
                 materialToUpdate,
-                "material", // Префикс для значения формы.
-                 m=>m.ID, m => m.SupplierID, m => m.Name, m => m.Manufacturer, m => m.UnitCost, m => m.MinimumBatch, m => m.ShelfLife))
+                "material",
+                 m => m.Name, m => m.Manufacturer, m => m.ShelfLife, m => m.UnitCost, m => m.MinimumBatch, m => m.SupplierID))
             {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
-
-            // Выбираем SupplierID, если TryUpdateModelAsync не работает.
-            PopulateSuppliersDropDownList(_context, materialToUpdate.SupplierID);
             return Page();
         }
 

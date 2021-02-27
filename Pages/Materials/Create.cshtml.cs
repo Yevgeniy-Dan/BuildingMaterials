@@ -12,9 +12,9 @@ namespace BuildingMaterials.Pages.Materials
 {
     public class CreateModel : SupplierNamePageModel
     {
-        private readonly BuildingMaterialsContext _context;
+        private readonly BuildingMaterials.Data.BuildingMaterialsContext _context;
 
-        public CreateModel(BuildingMaterialsContext context)
+        public CreateModel(BuildingMaterials.Data.BuildingMaterialsContext context)
         {
             _context = context;
         }

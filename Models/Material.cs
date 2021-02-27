@@ -22,6 +22,6 @@ namespace BuildingMaterials.Models
         public int ShelfLife { get; set; }
 
         public ICollection<Order> Orders { get; set; }
-        public Supplier Supplier { get; }
+        public  Supplier Supplier { get; set; }
     }
 }

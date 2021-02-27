@@ -29,6 +29,7 @@ namespace BuildingMaterials.Pages.Materials
             }
 
             Material = await _context.Materials
+                .Include(m => m.Supplier)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
 

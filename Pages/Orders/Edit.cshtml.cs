@@ -36,26 +36,34 @@ namespace BuildingMaterials.Pages.Orders
                 return NotFound();
             }
 
-            PopulateMaterialsDropDownList(_context);
+            PopulateMaterialsDropDownList(_context, Order.MaterialID);
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            var emptyOrder = new Order();
-
-            if (await TryUpdateModelAsync<Order>(emptyOrder,
-                "order",
-                o => o.MaterialID, o => o.FillingDate, o => o.Quantity, o => o.Unit, o => o.DeliveryDate))
+            if (id == null)
             {
-                _context.Orders.Add(emptyOrder);
+                return NotFound();
+            }
+            var orderToUpdate = await _context.Orders.FindAsync(id);
+
+            if (orderToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (await TryUpdateModelAsync<Order>(
+                orderToUpdate,
+                "order",
+                 o => o.DeliveryDate, o => o.MaterialID, o => o.Quantity, o => o.Unit, o => o.FillingDate))
+            {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
-
-            PopulateMaterialsDropDownList(_context, emptyOrder.MaterialID);
+            PopulateMaterialsDropDownList(_context, Order.MaterialID);
             return Page();
         }
 
