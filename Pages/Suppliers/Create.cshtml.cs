@@ -21,6 +21,7 @@ namespace BuildingMaterials.Pages.Suppliers
 
         public IActionResult OnGet()
         {
+            
             return Page();
         }
 

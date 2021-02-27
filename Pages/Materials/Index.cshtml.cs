@@ -67,7 +67,6 @@ namespace BuildingMaterials.Pages.Materials
 
             int pageSize = ConstantValues.pageSize;//КОНФИГУРАЦИЯ
             Materials = await PaginatedList<Material>.CreateAsync(materialsIQ
-                .Include(m => m.Supplier)
                 .AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }

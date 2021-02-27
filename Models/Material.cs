@@ -12,6 +12,7 @@ namespace BuildingMaterials.Models
         public int ID { get; set; }
 
         public int SupplierID { get; set; }
+        
 
         public string Name { get; set; }
         public string Manufacturer { get; set; }
@@ -21,7 +22,6 @@ namespace BuildingMaterials.Models
         public int ShelfLife { get; set; }
 
         public ICollection<Order> Orders { get; set; }
-
-        public Supplier Supplier { get; set; }
+        public Supplier Supplier { get; }
     }
 }

@@ -42,22 +42,26 @@ namespace BuildingMaterials.Pages.Materials
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            var emptyMaterial = new Material();
+            var materialToUpdate = await _context.Materials.FindAsync(id);
+
+            if (materialToUpdate == null)
+            {
+                return NotFound();
+            }
 
             if (await TryUpdateModelAsync<Material>(
-                emptyMaterial,
+                materialToUpdate,
                 "material", // Префикс для значения формы.
-                m => m.SupplierID, m => m.Name, m => m.Manufacturer, m => m.UnitCost, m => m.MinimumBatch, m => m.ShelfLife))
+                 m=>m.ID, m => m.SupplierID, m => m.Name, m => m.Manufacturer, m => m.UnitCost, m => m.MinimumBatch, m => m.ShelfLife))
             {
-                _context.Materials.Add(emptyMaterial);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
 
             // Выбираем SupplierID, если TryUpdateModelAsync не работает.
-            PopulateSuppliersDropDownList(_context, emptyMaterial.SupplierID);
+            PopulateSuppliersDropDownList(_context, materialToUpdate.SupplierID);
             return Page();
         }
 
