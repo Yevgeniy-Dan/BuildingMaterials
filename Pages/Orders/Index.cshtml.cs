@@ -12,20 +12,21 @@ namespace BuildingMaterials.Pages.Orders
 {
     public class IndexModel : PageModel
     {
-        private readonly BuildingMaterialsContext _context;
+        private readonly BuildingMaterials.Data.BuildingMaterialsContext _context;
 
-        public IndexModel(BuildingMaterialsContext context)
+        public IndexModel(BuildingMaterials.Data.BuildingMaterialsContext context)
         {
             _context = context;
         }
 
         public string NameSort { get; set; }
-        public string NameCurrentFilter { get; set; }
+        public string CurrentFilter { get; set; }
+        public string DateCurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
         public PaginatedList<Order> Orders { get; set; }
 
-        public async Task OnGetAsync(string sortOrder, string nameCurrentFilter, string searchString, int? pageIndex)
+        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, string dateSearchString, int? pageIndex)
         {
             CurrentSort = sortOrder;
             NameSort = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -36,9 +37,10 @@ namespace BuildingMaterials.Pages.Orders
             }
             else
             {
-                searchString = nameCurrentFilter;
+                searchString = currentFilter;
             }
-            NameCurrentFilter = searchString;
+            CurrentFilter = searchString;
+            DateCurrentFilter = dateSearchString;
 
             IQueryable<Order> ordersIQ = from o in _context.Orders
                                          select o;
@@ -46,6 +48,10 @@ namespace BuildingMaterials.Pages.Orders
             if (!string.IsNullOrEmpty(searchString))
             {
                 ordersIQ = ordersIQ.Where(o => o.Material.Name.Contains(searchString));
+            }
+            else if (DateTime.TryParse(dateSearchString, out DateTime dateValue))
+            {
+                ordersIQ = ordersIQ.Where(o => o.DeliveryDate == dateValue);
             }
 
             switch (sortOrder)

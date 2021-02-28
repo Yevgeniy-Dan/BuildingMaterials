@@ -12,20 +12,33 @@
 </p>
 
 <form asp-page="./Index" method="get">
-    <div class="form-action no-color">
+    <div class="container">
         <p>
-            Найти по наименованию:
-            <input type="text" name="SearchString" value="@Model.NameCurrentFilter" />
-            <input type="submit" name="Search" class="btn btn-primary" value="Поиск" />
             <a asp-page="./Index">Вернуться к полному списку</a>
         </p>
+        <div class="row">
+            <div class="form-action no-color, col-sm">
+                <p>
+                    Найти по наименованию:
+                    <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                    <input type="submit" name="Search" class="btn btn-primary" value="Поиск" />
+                </p>
+            </div>
+            <div class="form-action no-color, col-sm">
+                <p>
+                    Найти по дате:
+                    <input type="date" name="DateSearchString" value="@Model.CurrentFilter" />
+                    <input type="submit" name="Search" class="btn btn-primary" value="Поиск" />
+                </p>
+            </div>
+        </div>
     </div>
 </form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                <a asp-page="./Index" , asp-route-nameCurrentFilter="@Model.NameCurrentFilter", asp-route-sortOrder="@Model.NameSort">
+                <a asp-page="./Index" , asp-route-currentFilter="@Model.CurrentFilter" , asp-route-sortOrder="@Model.NameSort">
                     @Html.DisplayNameFor(model => model.Orders[0].Material)
                 </a>
 
@@ -84,14 +97,14 @@
 <a asp-page="./Index"
    asp-route-sortOrder="@Model.CurrentSort"
    asp-route-pageIndex="@(Model.Orders.PageIndex - 1)"
-   asp-route-nameCurrentFilter="@Model.NameCurrentFilter"
+   asp-route-currentFilter="@Model.CurrentFilter"
    class="btn btn-primary @prevDisabled">
     Предыдущая
 </a>
 <a asp-page="./Index"
    asp-route-sortOrder="@Model.CurrentSort"
    asp-route-pageIndex="@(Model.Orders.PageIndex + 1)"
-   asp-route-nameCurrentFilter="@Model.NameCurrentFilter"
+   asp-route-currentFilter="@Model.CurrentFilter"
    class="btn btn-primary @nextDisabled">
     Следующая
 </a>

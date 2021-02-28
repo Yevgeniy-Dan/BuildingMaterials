@@ -36,6 +36,7 @@ namespace BuildingMaterials.Models
         public int MinimumBatch { get; set; }
 
         [Display(Name = "Срок годности (в днях)")]
+        [DisplayFormat(NullDisplayText = "Нет срока")]
         [Range(1, int.MaxValue, ErrorMessage = "Пожалуйста, введите значние больше 0")]
         public int? ShelfLife { get; set; }
 
