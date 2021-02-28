@@ -9,27 +9,30 @@ namespace BuildingMaterials.Models
 {
     public class Supplier
     {
+
         public int ID { get; set; }
 
-        [Required]
-        [Display(Name = "Компания"), StringLength(50, MinimumLength = 3, ErrorMessage ="Пожалуйста, введите имя компании")]
+        [Required(ErrorMessage = "Это поле обязательно для заполнения")]
+        [Display(Name = "Компания"), StringLength(50, MinimumLength = 3, ErrorMessage = "Пожалуйста, введите имя компании")]
         public string CompanyName { get; set; }
 
-        [Required]
-        [StringLength(100, MinimumLength = 3, ErrorMessage ="Пожалуйста, введите адрес офиса")]
+        [Required(ErrorMessage = "Это поле обязательно для заполнения")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Пожалуйста, введите адрес офиса")]
+        [Display(Name = "Адрес")]
         public string Address { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Это поле обязательно для заполнения")]
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Номер телефона (например, +380(97)965-45-45)")]
-        [RegularExpression(@"(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)", ErrorMessage = "Пожалуйста, введите корректный номер телефона")]
+        [Display(Name = "Номер телефона")]
         public string Phone { get; set; }
 
-        [Display(Name ="Начальник (имя, фамилия и отчество)")]
-        [RegularExpression(@"(^[A-Z]{1}[a-z]{1,14} [A-Z]{1}[a-z]{1,14} [A-Z]{1}[a-z]{1,14}$)|(^[А-Я]{1}[а-я]{1,14} [А-Я]{1}[а-я]{1,14} [А-Я]{1}[а-я]{1,14}$)", ErrorMessage ="Пожалуйста, введите полное имя начальника")]
+        [Required(ErrorMessage = "Это поле обязательно для заполнения")]
+        [Display(Name = "Начальник")]
+        [RegularExpression(@"^[А-Я]+[а-яА-я-""'\s-]*$", ErrorMessage = "Пожалуйста, введите корреткное значение")]
         public string ChiefFullName { get; set; }
 
-        public ICollection<Material> Materials { get; }
+        [Display(Name = "Материалы")]
+        public ICollection<Material> Materials { get; set; }
 
     }
 }

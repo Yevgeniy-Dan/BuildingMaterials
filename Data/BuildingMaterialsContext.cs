@@ -23,6 +23,7 @@ namespace BuildingMaterials.Data
             modelBuilder.Entity<Supplier>().ToTable("Supplier");
             modelBuilder.Entity<Material>().ToTable("Material");
             modelBuilder.Entity<Order>().ToTable("Order");
+
             //modelBuilder.Entity<Material>()
             //    .HasOne(m => m.Supplier)
             //    .WithMany()
