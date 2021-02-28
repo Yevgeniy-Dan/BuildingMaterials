@@ -16,10 +16,15 @@ namespace BuildingMaterials.Pages.Materials
         public void PopulateSuppliersDropDownList(BuildingMaterialsContext _context, object selectedSupplier = null)
         {
             var suppliersQuery = from s in _context.Suppliers
-                                 orderby s.ChiefFullName
-                                 select s;
+                orderby s.ChiefFullName
+                                 select
+                (new
+                {
+                    id = s.ID,
+                    NameCompany = s.ChiefFullName + " | " + s.CompanyName
+                });
 
-            SupplierNameSL = new SelectList(suppliersQuery.AsNoTracking(), "ID", "ChiefFullName", selectedSupplier);
+            SupplierNameSL = new SelectList(suppliersQuery, "id", "NameCompany", selectedSupplier);
         }
     }
 }

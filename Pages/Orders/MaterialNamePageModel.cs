@@ -17,9 +17,13 @@ namespace BuildingMaterials.Pages.Orders
         {
             var materialsQuery = from o in _context.Materials
                                  orderby o.Name
-                                 select o;
+                                 select (new
+                                 {
+                                     id = o.ID,
+                                     NameSupplier = o.Name + " | " + o.Supplier.ChiefFullName
+                                 });
 
-            MaterialNameSL = new SelectList(materialsQuery.AsNoTracking(), "ID", "Name", selectedMaterial);
+            MaterialNameSL = new SelectList(materialsQuery.AsNoTracking(), "id", "NameSupplier", selectedMaterial);
         }
     }
 }

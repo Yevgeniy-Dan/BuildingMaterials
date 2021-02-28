@@ -21,5 +21,6 @@ namespace BuildingMaterials.Models
         public string ChiefFullName { get; set; }
 
         public ICollection<Material> Materials { get; }
+
     }
 }
