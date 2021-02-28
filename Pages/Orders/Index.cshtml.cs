@@ -12,20 +12,20 @@ namespace BuildingMaterials.Pages.Orders
 {
     public class IndexModel : PageModel
     {
-        private readonly BuildingMaterials.Data.BuildingMaterialsContext _context;
+        private readonly BuildingMaterialsContext _context;
 
-        public IndexModel(BuildingMaterials.Data.BuildingMaterialsContext context)
+        public IndexModel(BuildingMaterialsContext context)
         {
             _context = context;
         }
 
         public string NameSort { get; set; }
-        public string CurrentFilter { get; set; }
+        public string NameCurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
         public PaginatedList<Order> Orders { get; set; }
 
-        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
+        public async Task OnGetAsync(string sortOrder, string nameCurrentFilter, string searchString, int? pageIndex)
         {
             CurrentSort = sortOrder;
             NameSort = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -36,9 +36,9 @@ namespace BuildingMaterials.Pages.Orders
             }
             else
             {
-                searchString = currentFilter;
+                searchString = nameCurrentFilter;
             }
-            CurrentFilter = searchString;
+            NameCurrentFilter = searchString;
 
             IQueryable<Order> ordersIQ = from o in _context.Orders
                                          select o;
