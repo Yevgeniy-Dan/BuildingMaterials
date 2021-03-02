@@ -20,6 +20,11 @@
             <a asp-page="./Index">Вернуться к полному списку</a>
         </p>
     </div>
+    <div class="form-action no-color">
+
+            <input type="checkbox" id="UnusedMaterials" name="UnusedMaterials" asp-for="@Model.IsUnusedMaterial"/>   
+            <label for="UnusedMaterials">Не использованы</label>
+    </div>
 </form>
 
 <table class="table">

@@ -83,17 +83,17 @@ namespace BuildingMaterials.Data
 
             var orders = new Order[]
             {
-                new Order{MaterialID=materials.Single(m=>m.ID==1).ID, FillingDate=DateTime.Now, Quantity=10, Unit="кг", DeliveryDate=DateTime.Parse("2021-03-13")},
+                new Order{MaterialID=materials.Single(m=>m.ID==1).ID, Quantity=10, Unit="кг", DeliveryDate=DateTime.Parse("2021-03-13")},
 
-                new Order{MaterialID=materials.Single(m=>m.ID==2).ID, FillingDate=DateTime.Now, Quantity=100, Unit="л", DeliveryDate=DateTime.Parse("2021-03-13")},
+                new Order{MaterialID=materials.Single(m=>m.ID==2).ID, Quantity=100, Unit="л", DeliveryDate=DateTime.Parse("2021-03-13")},
 
-                new Order{MaterialID=materials.Single(m=>m.ID==3).ID, FillingDate=DateTime.Now, Quantity=10, Unit="кг", DeliveryDate=DateTime.Parse("2021-03-13")},
+                new Order{MaterialID=materials.Single(m=>m.ID==3).ID, Unit="кг", DeliveryDate=DateTime.Parse("2021-03-13")},
 
-                new Order{MaterialID=materials.Single(m=>m.ID==4).ID, FillingDate=DateTime.Now, Quantity=90, Unit="кг", DeliveryDate=DateTime.Parse("2021-03-13")},
+                new Order{MaterialID=materials.Single(m=>m.ID==4).ID, Quantity=90, Unit="кг", DeliveryDate=DateTime.Parse("2021-03-13")},
 
-                new Order{MaterialID=materials.Single(m=>m.ID==5).ID, FillingDate=DateTime.Now, Quantity=10, Unit="кг", DeliveryDate=DateTime.Parse("2021-03-13")},
+                new Order{MaterialID=materials.Single(m=>m.ID==5).ID, Quantity=10, Unit="кг", DeliveryDate=DateTime.Parse("2021-03-13")},
 
-                new Order{MaterialID=materials.Single(m=>m.ID==6).ID, FillingDate=DateTime.Now, Quantity=100, Unit="палет", DeliveryDate=DateTime.Parse("2021-03-13")},
+                new Order{MaterialID=materials.Single(m=>m.ID==6).ID, Quantity=100, Unit="палет", DeliveryDate=DateTime.Parse("2021-03-13")},
             };
 
             context.Orders.AddRange(orders);

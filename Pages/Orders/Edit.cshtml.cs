@@ -58,7 +58,7 @@ namespace BuildingMaterials.Pages.Orders
             if (await TryUpdateModelAsync<Order>(
                 orderToUpdate,
                 "order",
-                 o => o.DeliveryDate, o => o.MaterialID, o => o.Quantity, o => o.Unit, o => o.FillingDate))
+                 o => o.DeliveryDate, o => o.MaterialID, o => o.Quantity, o => o.Unit))
             {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BuildingMaterials.Data;
 using BuildingMaterials.Models;
+using BuildingMaterials.Models.MaterialViewModels;
 
 namespace BuildingMaterials.Pages.Materials
 {
@@ -23,10 +24,11 @@ namespace BuildingMaterials.Pages.Materials
         public string ManufacterSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
+        public bool IsUnusedMaterial { get; set; }
 
         public PaginatedList<Material> Materials { get; set; }
 
-        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
+        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex, bool unusedMaterials)
         {
             CurrentFilter = currentFilter;
             NameSort = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -43,11 +45,17 @@ namespace BuildingMaterials.Pages.Materials
             CurrentFilter = searchString;
 
             IQueryable<Material> materialsIQ = from m in _context.Materials
-                                               select m;
+                                                select m;
+
+            IsUnusedMaterial = unusedMaterials;
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 materialsIQ = materialsIQ.Where(m => m.Name.Contains(searchString));
+            }
+            else if (IsUnusedMaterial)
+            {
+
             }
             switch (sortOrder)
             {

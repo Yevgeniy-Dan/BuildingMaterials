@@ -19,7 +19,7 @@ namespace BuildingMaterials.Pages.Orders
             _context = context;
         }
 
-        public IActionResult OnGet(bool dateDifference = true)
+        public IActionResult OnGet()
         {
             PopulateMaterialsDropDownList(_context);
             return Page();
@@ -36,15 +36,15 @@ namespace BuildingMaterials.Pages.Orders
 
             if (await TryUpdateModelAsync<Order>(emptyOrder,
                 "order",
-                o => o.ID, o => o.MaterialID, o => o.FillingDate, o => o.Quantity, o => o.Unit, o => o.DeliveryDate))
+                o => o.ID, o => o.MaterialID, o => o.Quantity, o => o.Unit, o => o.DeliveryDate))
             {
-                if (emptyOrder.DeliveryDate > emptyOrder.FillingDate)
+                if (emptyOrder.MaterialID == emptyOrder.Material.ID)
                 {
-                    _context.Orders.Add(emptyOrder);
-                    await _context.SaveChangesAsync();
-                    return RedirectToPage("./Index");
+
                 }
-                OnGet(false);
+                _context.Orders.Add(emptyOrder);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
 
             PopulateMaterialsDropDownList(_context, emptyOrder.MaterialID);
