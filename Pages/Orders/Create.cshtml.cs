@@ -12,12 +12,14 @@ namespace BuildingMaterials.Pages.Orders
 {
     public class CreateModel : MaterialNamePageModel
     {
-        private readonly BuildingMaterials.Data.BuildingMaterialsContext _context;
+        private readonly BuildingMaterialsContext _context;
 
-        public CreateModel(BuildingMaterials.Data.BuildingMaterialsContext context)
+        public CreateModel(BuildingMaterialsContext context)
         {
             _context = context;
         }
+        public string QuantityValidate { get; set; }
+        public string DateValidate { get; set; }
 
         public IActionResult OnGet()
         {
@@ -30,21 +32,34 @@ namespace BuildingMaterials.Pages.Orders
 
         public Material Material { get; set; }
 
+
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             var emptyOrder = new Order();
-
+            IQueryable<Material> materialsIQ = from m in _context.Materials
+                                               select m;
             if (await TryUpdateModelAsync<Order>(emptyOrder,
                 "order",
                 o => o.ID, o => o.MaterialID, o => o.Quantity, o => o.Unit, o => o.DeliveryDate))
             {
 
-                //if (emptyOrder.Quantity < emptyOrder.Material.ShelfLife)
-                //{
-                //    return Page();
-                //}
+                Material material = (from m in materialsIQ
+                                     where m.ID == emptyOrder.MaterialID
+                                     select m).Single();
+                if (emptyOrder.Quantity < material.MinimumBatch)
+                {
+                    QuantityValidate = $"Количество не может быть меньше {material.MinimumBatch}";
+                    PopulateMaterialsDropDownList(_context, Order.MaterialID);
+                    return Page();
+                }
+                else if (emptyOrder.DeliveryDate < DateTime.Now)
+                {
+                    DateValidate = $"Пожалуйста, введите корректную дату";
+                    PopulateMaterialsDropDownList(_context, Order.MaterialID);
+                    return Page();
+                }
                 _context.Orders.Add(emptyOrder);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");

@@ -23,7 +23,8 @@ namespace BuildingMaterials.Data
             modelBuilder.Entity<Supplier>().ToTable("Supplier");
             modelBuilder.Entity<Material>().ToTable("Material");
             modelBuilder.Entity<Order>().ToTable("Order");
-
+            //modelBuilder.Entity<Order>()
+            //    .HasCheckConstraint("CHK_OrderMaterial", "CHECK (Quantity>=Order.Material.MinimumBatch)");
             //modelBuilder.Entity<Material>()
             //    .HasOne(m => m.Supplier)
             //    .WithMany()

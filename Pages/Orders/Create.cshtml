@@ -29,6 +29,7 @@
                 <label asp-for="Order.Quantity" class="control-label"></label>
                 <input asp-for="Order.Quantity" class="form-control" />
                 <span asp-validation-for="Order.Quantity" class="text-danger"></span>
+                <label><font color="red">@Model.QuantityValidate</font></label>
             </div>
             <div class="form-group">
                 <label asp-for="Order.Unit" class="control-label"></label>
@@ -39,6 +40,7 @@
                 <label asp-for="Order.DeliveryDate" class="control-label"></label>
                 <input asp-for="Order.DeliveryDate" class="form-control" />
                 <span asp-validation-for="Order.DeliveryDate" class="text-danger"></span>
+                <label><font color="red">@Model.DateValidate</font></label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Создать" class="btn btn-primary" />

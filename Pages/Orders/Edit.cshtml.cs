@@ -13,15 +13,17 @@ namespace BuildingMaterials.Pages.Orders
 {
     public class EditModel : MaterialNamePageModel
     {
-        private readonly BuildingMaterials.Data.BuildingMaterialsContext _context;
+        private readonly BuildingMaterialsContext _context;
 
-        public EditModel(BuildingMaterials.Data.BuildingMaterialsContext context)
+        public EditModel(BuildingMaterialsContext context)
         {
             _context = context;
         }
 
         [BindProperty]
         public Order Order { get; set; }
+        public string QuantityValidate { get; set; }
+        public string DateValidate { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -47,8 +49,12 @@ namespace BuildingMaterials.Pages.Orders
             if (id == null)
             {
                 return NotFound();
-            }
+            } 
+            
+
             var orderToUpdate = await _context.Orders.FindAsync(id);
+            IQueryable<Material> materialsIQ = from m in _context.Materials
+                                               select m;
 
             if (orderToUpdate == null)
             {
@@ -60,8 +66,27 @@ namespace BuildingMaterials.Pages.Orders
                 "order",
                  o => o.DeliveryDate, o => o.MaterialID, o => o.Quantity, o => o.Unit))
             {
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
+                Material material = (from m in materialsIQ
+                                     where m.ID == orderToUpdate.MaterialID
+                                     select m).Single();
+                if (orderToUpdate.Quantity < material.MinimumBatch)
+                {
+                    QuantityValidate = $"Количество не может быть меньше {material.MinimumBatch}";
+                    PopulateMaterialsDropDownList(_context, Order.MaterialID);
+
+                    return Page();
+                }
+                else if (orderToUpdate.DeliveryDate < DateTime.Now)
+                {
+                    DateValidate = $"Пожалуйста, введите корректную дату";
+                    PopulateMaterialsDropDownList(_context, Order.MaterialID);
+                    return Page();
+                }
+                else
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToPage("./Index");
+                }
             }
             PopulateMaterialsDropDownList(_context, Order.MaterialID);
             return Page();
