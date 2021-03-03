@@ -28,6 +28,8 @@ namespace BuildingMaterials.Pages.Orders
         [BindProperty]
         public Order Order { get; set; }
 
+        public Material Material { get; set; }
+
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -38,10 +40,11 @@ namespace BuildingMaterials.Pages.Orders
                 "order",
                 o => o.ID, o => o.MaterialID, o => o.Quantity, o => o.Unit, o => o.DeliveryDate))
             {
-                if (emptyOrder.MaterialID == emptyOrder.Material.ID)
-                {
 
-                }
+                //if (emptyOrder.Quantity < emptyOrder.Material.ShelfLife)
+                //{
+                //    return Page();
+                //}
                 _context.Orders.Add(emptyOrder);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");

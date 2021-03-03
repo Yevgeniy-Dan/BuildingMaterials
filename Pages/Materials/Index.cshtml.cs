@@ -45,7 +45,12 @@ namespace BuildingMaterials.Pages.Materials
             CurrentFilter = searchString;
 
             IQueryable<Material> materialsIQ = from m in _context.Materials
-                                                select m;
+                                               select m;
+            IEnumerable<Order> orderIQ = from o in _context.Orders
+                                         select o;
+            IQueryable<Material> unusedMaterialsIQ = from m in _context.Materials
+                                                     select m;
+            List<int> IDes = new List<int>();
 
             IsUnusedMaterial = unusedMaterials;
 
@@ -53,10 +58,21 @@ namespace BuildingMaterials.Pages.Materials
             {
                 materialsIQ = materialsIQ.Where(m => m.Name.Contains(searchString));
             }
-            else if (IsUnusedMaterial)
-            {
 
+            if (IsUnusedMaterial)
+            {
+                foreach (var order in orderIQ)
+                {
+                    IDes.Add(order.MaterialID);
+                }
+                foreach (var order in IDes)
+                {
+                    var id = _context.Materials.FirstOrDefault(m => m.ID == order).ID;
+
+                    materialsIQ = materialsIQ.Where(m => m.ID != order);
+                }
             }
+
             switch (sortOrder)
             {
                 case "name_desc":
@@ -74,9 +90,11 @@ namespace BuildingMaterials.Pages.Materials
             }
 
             int pageSize = ConstantValues.pageSize;//КОНФИГУРАЦИЯ
+
             Materials = await PaginatedList<Material>.CreateAsync(materialsIQ
                 .Include(m => m.Supplier)
                 .AsNoTracking(), pageIndex ?? 1, pageSize);
+
         }
     }
 }

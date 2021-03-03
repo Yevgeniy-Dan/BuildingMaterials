@@ -1,0 +1,140 @@
+﻿@page
+
+@model BuildingMaterials.Pages.AdditionalModel
+
+@{
+    ViewData["Title"] = "Order Body Statistics";
+}
+
+<h3>Сумма заказов</h3>
+<form method="post">
+    <div class="container">
+        <div class="row">
+            <div class="form-action no-color, col-sm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Material.ID" />
+                <div class="form-group">
+                    <label asp-for="Material.Supplier" class="control-label"></label>
+                    <select asp-for="Material.SupplierID" class="form-control" asp-items="@Model.SupplierNameSL" name="SearchSupplier">
+                        <option>
+                            -- Выбрать поставщика --
+                        </option>
+                    </select>
+                    <span asp-validation-for="Material.SupplierID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-action no-color, col-sm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" />
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <div class="form-action no-color, col-sm">
+                        @*<label class="control-label"> от: </label>*@
+                        <input type="date" name="StartDateSearchString" value="" />
+                        @*<label class="control-label"> до: </label>
+                            <input type="date" name="EndDateSearchString" value="" />*@
+                        <input type="submit" name="Search2" class="btn btn-primary" value="Поиск" />
+                    </div>
+                    <span asp-validation-for="Material.SupplierID" class="text-danger"></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountOrdersVM[0].OrderID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountOrdersVM[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountOrdersVM[0].UnitCost)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AmountOrdersVM[0].Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountOrdersVM[0].DeliveryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountOrdersVM[0].Cost)
+            </th>
+            <th></th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model.AmountOrdersVM)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitCost)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+            </tr>
+        }
+        <tr align="right">
+            <td colspan="6"><b> Общая стоимость: @Model.SumOrders</b></td>
+        </tr>
+    </tbody>
+</table>
+
+<!--<h3>Количество поставок материала</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Общая стоимость</th>
+            <th></th>
+        </tr>
+    </thead>-->
+    @*<tbody>
+        @foreach (var item in Model.MaterialDelivery.Orders)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.OrderID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @{
+                        foreach (var order in item.Material.Orders)
+                        {
+                            @order.MaterialID @:  @order.Material.Name <br />
+                        }
+                    }
+                </td>
+                <td>
+                    <a asp-page="./Index" asp-route-id="@item.ID">Выбрать</a> |
+                </td>
+            </tr>
+        }
+    </tbody>*@
+<!--</table>-->

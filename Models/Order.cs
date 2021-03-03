@@ -30,6 +30,12 @@ namespace BuildingMaterials.Models
         [Display(Name = "Дата доставки")]
         public DateTime DeliveryDate { get; set; }
 
+        [Display(Name = "Стоимость")]
+        public decimal Cost { get; set; }
+
+        [Display(Name = "Сумма к оплате")]
+        public decimal AmountToPay { get; set; }
+
         [Display(Name = "Материал")]
         public Material Material { get; set; }
     }

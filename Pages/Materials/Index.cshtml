@@ -15,15 +15,12 @@
     <div class="form-action no-color">
         <p>
             Найти по имени:
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="text" name="SearchString" value="" />
+            <input type="checkbox" id="UnusedMaterials" name="UnusedMaterials" asp-for="@Model.IsUnusedMaterial" />
+            <label for="UnusedMaterials">Не использованы</label>
             <input type="submit" value="Поиск" class="btn btn-primary" />
             <a asp-page="./Index">Вернуться к полному списку</a>
         </p>
-    </div>
-    <div class="form-action no-color">
-
-            <input type="checkbox" id="UnusedMaterials" name="UnusedMaterials" asp-for="@Model.IsUnusedMaterial"/>   
-            <label for="UnusedMaterials">Не использованы</label>
     </div>
 </form>
 

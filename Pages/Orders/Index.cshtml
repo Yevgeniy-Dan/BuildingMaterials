@@ -52,6 +52,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Orders[0].DeliveryDate)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders[0].Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders[0].AmountToPay)
+            </th>
 
             <th></th>
         </tr>
@@ -72,11 +78,23 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.DeliveryDate)
                 </td>
-
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.ID">Редактировать</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ID">Подробности</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ID">Удалить</a>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AmountToPay)
+                </td>
+                <td>
+                    @if (item.Material.ShelfLife != null)
+                    {
+                        int shelfLife = (int)item.Material.ShelfLife;
+                        @if (item.DeliveryDate.AddDays(shelfLife) > DateTime.Now)
+                        {
+                            <a asp-page="./Edit" asp-route-id="@item.ID">Редактировать |</a>
+                            <a asp-page="./Delete" asp-route-id="@item.ID">Удалить |</a>
+                        }
+                    }
+                    <a asp-page="./Details" asp-route-id="@item.ID">Подробности</a>
                 </td>
             </tr>
         }

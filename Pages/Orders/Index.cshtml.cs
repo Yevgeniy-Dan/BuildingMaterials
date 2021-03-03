@@ -23,6 +23,7 @@ namespace BuildingMaterials.Pages.Orders
         public string CurrentFilter { get; set; }
         public string DateCurrentFilter { get; set; }
         public string CurrentSort { get; set; }
+        public bool IsExpired { get; set; } = false;
 
         public PaginatedList<Order> Orders { get; set; }
 
@@ -44,6 +45,14 @@ namespace BuildingMaterials.Pages.Orders
 
             IQueryable<Order> ordersIQ = from o in _context.Orders
                                          select o;
+            IQueryable<Material> materialsIQ = from m in _context.Materials
+                                               select m;
+            foreach (var order in ordersIQ)
+            {
+                Material material = materialsIQ.Where(m => m.ID == order.MaterialID).Single();
+                order.Cost = order.Quantity * material.UnitCost;
+                order.AmountToPay = (order.Cost / 100 * 20) + order.Cost;
+            }
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -67,8 +76,7 @@ namespace BuildingMaterials.Pages.Orders
             int pageSize = ConstantValues.pageSize;
 
             Orders = await PaginatedList<Order>.CreateAsync(ordersIQ
-                .Include(o => o.Material)
-                .AsNoTracking(), pageIndex ?? 1, pageSize);
+                .Include(o => o.Material), pageIndex ?? 1, pageSize);
         }
     }
 }
