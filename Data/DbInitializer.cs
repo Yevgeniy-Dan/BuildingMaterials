@@ -10,7 +10,7 @@ namespace BuildingMaterials.Data
     {
         public static void Initialize(BuildingMaterialsContext context)
         {
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
 
             //Ищем поставщиков
             if (context.Suppliers.Any())

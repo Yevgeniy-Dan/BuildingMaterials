@@ -88,7 +88,8 @@
                     @if (item.Material.ShelfLife != null)
                     {
                         int shelfLife = (int)item.Material.ShelfLife;
-                        @if (item.DeliveryDate.AddDays(shelfLife) > DateTime.Now)
+                        DateTime expiryDate = item.DeliveryDate.AddDays(shelfLife).Date;
+                        @if (expiryDate > DateTime.Now.Date)
                         {
                             <a asp-page="./Edit" asp-route-id="@item.ID">Редактировать |</a>
                             <a asp-page="./Delete" asp-route-id="@item.ID">Удалить |</a>

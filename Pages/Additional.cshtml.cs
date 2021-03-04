@@ -46,7 +46,6 @@ namespace BuildingMaterials.Pages
         public async Task<IActionResult> OnPostAsync(int? searchSupplier, string startDateSearchString)
         {
 
-            PopulateSuppliersDropDownList(_context);
             if (searchSupplier == null || startDateSearchString == null)
             {
                 return RedirectToPage("./Additional");
@@ -72,6 +71,7 @@ namespace BuildingMaterials.Pages
                      DeliveryDate = o.DeliveryDate
                  }).ToListAsync();
             SumOrders = Math.Round(AmountOrdersVM.Sum(o => o.Cost), 2);
+            PopulateSuppliersDropDownList(_context);
             return Page();
         }
     }
