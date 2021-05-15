@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Домашняя";
 }
+<link rel="stylesheet" href="~/css/custom-style.css" />
+
 <div id="showcase">
     <div class="greeting">
         <h1>Добро пожаловать!</h1>
@@ -29,3 +31,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    /* удалить класс container из Layout.cshtml, 
+    чтобы отобразить фон домашней страницы на весь экран*/
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleted = document.querySelector('.deleted');
+        deleted.classList.remove('container');
+        console.log(deleted.className);
+    })
+</script>

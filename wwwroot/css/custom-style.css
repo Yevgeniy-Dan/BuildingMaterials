@@ -67,3 +67,32 @@ p {
     color: #e56f1b;
     background: #fff;
 }
+
+@media (max-width: 1200px){
+    h1 {
+        font-size: 2.8em;
+    }
+
+    .boxes{
+        flex-direction: column;
+    }
+
+    .box-1,
+    .box-2 {
+        padding: 10px 20px;
+        width: 400px;
+        height: 300px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px){
+    h1 {
+        font-size: 2.4em;
+    }
+
+    .box-1,
+    .box-2 {
+        width: 350px;
+    }
+}
