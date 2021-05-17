@@ -98,6 +98,19 @@ namespace BuildingMaterials.Data
 
             context.Orders.AddRange(orders);
             context.SaveChanges();
+
+            var warehouseItems = new Warehouse[]
+            {
+                new Warehouse{OrderID=orders.Single(o=>o.ID==1).ID, Quantity = 31, Unit = "кг"},
+                
+                new Warehouse{OrderID=orders.Single(o=>o.ID==2).ID, Quantity = 32, Unit = "палет"},
+
+                new Warehouse{OrderID=orders.Single(o=>o.ID==3).ID, Quantity = 33, Unit = "шт"},
+
+                new Warehouse{OrderID=orders.Single(o=>o.ID==4).ID, Quantity = 34, Unit = "л"}
+            };
+            context.Warehouses.AddRange(warehouseItems);
+            context.SaveChanges();
         }
     }
 }

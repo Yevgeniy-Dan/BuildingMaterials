@@ -71,6 +71,27 @@ namespace BuildingMaterials.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Warehouse",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderID = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    Unit = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Warehouse", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Warehouse_Order_OrderID",
+                        column: x => x.OrderID,
+                        principalTable: "Order",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Material_SupplierID",
                 table: "Material",
@@ -80,10 +101,19 @@ namespace BuildingMaterials.Migrations
                 name: "IX_Order_MaterialID",
                 table: "Order",
                 column: "MaterialID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Warehouse_OrderID",
+                table: "Warehouse",
+                column: "OrderID",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Warehouse");
+
             migrationBuilder.DropTable(
                 name: "Order");
 

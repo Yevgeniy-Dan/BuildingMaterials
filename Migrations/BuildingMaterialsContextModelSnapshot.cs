@@ -15,7 +15,7 @@ namespace BuildingMaterials.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.12")
+                .HasAnnotation("ProductVersion", "3.1.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -118,6 +118,30 @@ namespace BuildingMaterials.Migrations
                     b.ToTable("Supplier");
                 });
 
+            modelBuilder.Entity("BuildingMaterials.Models.Warehouse", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("OrderID")
+                        .IsUnique();
+
+                    b.ToTable("Warehouse");
+                });
+
             modelBuilder.Entity("BuildingMaterials.Models.Material", b =>
                 {
                     b.HasOne("BuildingMaterials.Models.Supplier", "Supplier")
@@ -132,6 +156,15 @@ namespace BuildingMaterials.Migrations
                     b.HasOne("BuildingMaterials.Models.Material", "Material")
                         .WithMany("Orders")
                         .HasForeignKey("MaterialID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BuildingMaterials.Models.Warehouse", b =>
+                {
+                    b.HasOne("BuildingMaterials.Models.Order", "Order")
+                        .WithOne("Warehouse")
+                        .HasForeignKey("BuildingMaterials.Models.Warehouse", "OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

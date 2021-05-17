@@ -1,0 +1,45 @@
+﻿@page
+@model BuildingMaterials.Pages.Warehouses.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Warehouse</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Warehouse.ID" />
+            <div class="form-group">
+                <label asp-for="Warehouse.OrderID" class="control-label"></label>
+                <select asp-for="Warehouse.OrderID" class="form-control" asp-items="ViewBag.OrderID"></select>
+                <span asp-validation-for="Warehouse.OrderID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Warehouse.Quantity" class="control-label"></label>
+                <input asp-for="Warehouse.Quantity" class="form-control" />
+                <span asp-validation-for="Warehouse.Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Warehouse.Unit" class="control-label"></label>
+                <input asp-for="Warehouse.Unit" class="form-control" />
+                <span asp-validation-for="Warehouse.Unit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

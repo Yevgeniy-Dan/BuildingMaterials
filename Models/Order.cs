@@ -38,5 +38,6 @@ namespace BuildingMaterials.Models
 
         [Display(Name = "Материал")]
         public Material Material { get; set; }
+        public Warehouse Warehouse { get; set; }
     }
 }

@@ -1,0 +1,39 @@
+﻿@page
+@model BuildingMaterials.Pages.Warehouses.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Склад</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Warehouse[0].Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Warehouse[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Warehouse[0].Unit)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Warehouse) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.Material.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit)
+            </td>            
+        </tr>
+}
+    </tbody>
+</table>
