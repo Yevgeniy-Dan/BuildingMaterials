@@ -1,0 +1,124 @@
+[33mcommit 914a7548a4daad946ccff40b567c0417e9ad74b3[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Mon May 17 09:52:34 2021 +0300
+
+    Добавление новой модели Warehouse и связанных страниц
+
+[33mcommit ad687dc89883c2ed2acf757d3e87bb7667203f24[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sun May 16 13:09:18 2021 +0300
+
+    Файл Index.cshtml – Убрать операции CRUD при доставке материала
+
+[33mcommit b3c7b3659382de00584b5096ac1a07612c181855[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sat May 15 15:18:05 2021 +0300
+
+    Заставка на домашней страницы на полный экран
+
+[33mcommit a49363937d1464d464319875767342d7e37d2b2c[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sat May 15 11:59:22 2021 +0300
+
+    Изменение фона на домашней странице Index.cshtml
+    Добавление собственной таблицы стилей по пути wwwroot/css/custom-style.css
+
+[33mcommit 544e1f76d80415e253cc5ea8dcbac2b760f5e658[m
+Merge: 2b30696 b3b2e9b
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Thu Mar 4 16:00:46 2021 +0200
+
+    Merge branch 'master' of https://github.com/Yevgeniy-Dan/BuildingMaterials
+
+[33mcommit 2b306960aee24ce3448d2d3141ad889ac2bed6e9[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Thu Mar 4 16:00:36 2021 +0200
+
+    Изменения отображения диаграммы сущностей
+
+[33mcommit b3b2e9bcd65c434425faf30334405b3b2596f32e[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Thu Mar 4 12:31:39 2021 +0200
+
+    Создание README.md
+    
+    Создание файла README.md
+
+[33mcommit dc7f115ecd9e874c1f6bfa18a0f4bac868072c3f[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Thu Mar 4 12:20:59 2021 +0200
+
+    Финальные обновления
+
+[33mcommit 772baecb6e1e0060a1e5d035ed399527e0c701b3[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Wed Mar 3 23:31:35 2021 +0200
+
+    Добавление проверки на дату и количество при заказе определенного материала
+
+[33mcommit 984903c5d015ebcd508523d1f638b7779844946e[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Wed Mar 3 21:48:08 2021 +0200
+
+    Добавлние полей стоимости и суммы к оплате;
+    добавление checkbox для неипользованных материалов;
+
+[33mcommit 737b441bb15542ab8f2d530ae7d2bf5184a634ff[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Tue Mar 2 17:33:41 2021 +0200
+
+    Удаление FillingDate-свойства из моднли Order
+
+[33mcommit 9b94e6270d541fede62934f9cfdda390e441d37e[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sun Feb 28 17:30:57 2021 +0200
+
+    Добавление кнопки в Metrials.Edit "Увеличить стоимость на 15%"
+
+[33mcommit 021c7b512c8d758571a7aff86531976da7f36e8d[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sun Feb 28 14:54:03 2021 +0200
+
+    Смена имени переменной
+
+[33mcommit 9687ceff6aa77e5884d3e0e9ed26f24422c583a3[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sun Feb 28 14:25:15 2021 +0200
+
+    Замена всех проверок на русский язык
+
+[33mcommit abbecd28cdaef32a40e731fc95525dce4fc51559[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sun Feb 28 11:31:39 2021 +0200
+
+    Добавление атрибутов к моделям
+
+[33mcommit 4b935bb7cb36fd141be4ccf248b7e225b39c5404[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sun Feb 28 10:51:34 2021 +0200
+
+    Отображние наименования материала и поставщика в страницах Orders и имени поставщика и компании, в которой он работет в страницах Materials
+
+[33mcommit 4c8d98c403bc6b6b9bc30b88fd97a0a34a5bee7f[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sat Feb 27 22:01:14 2021 +0200
+
+    Установка set в значение навигационного свойства модели Material         public  Supplier Supplier { get; set; }
+
+[33mcommit 7e7005e16ee5f6cd714cc2ed9b8984197769564e[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sat Feb 27 21:07:13 2021 +0200
+
+    Добавление параметров глобализации. Улучшенные страницы материалы
+
+[33mcommit 696b2b685221ec476719687c9d17640dfdf49b49[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sat Feb 27 19:10:13 2021 +0200
+
+    Добавьте файлы проекта.
+
+[33mcommit 1e9edd8d65f8df5d100fd86edaaa07018a5acdc4[m
+Author: Yevhenii Danoi <jeniadan1302@gmail.com>
+Date:   Sat Feb 27 19:09:59 2021 +0200
+
+    Добавьте GITIGNORE- и GITATTRIBUTES-файлы.

@@ -2,16 +2,34 @@
 @model BuildingMaterials.Pages.Warehouses.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Склад";
 }
 
 <h1>Склад</h1>
 
+<form asp-page="./Index" method="get">
+    <div class="container">
+        <p>
+            <a asp-page="./Index">Вернуться к полному списку</a>
+        </p>
+        <div class="row">
+            <div class="form-action no-color, col-sm">
+                <p>
+                    Найти по наименованию:
+                    <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                    <input type="submit" name="Search" class="btn btn-primary" value="Поиск" />
+                </p>
+            </div>
+        </div>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Warehouse[0].Order)
+                <a asp-page="./Index" , asp-route-currentFilter="@Model.CurrentFilter" , asp-route-sortMaterial="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.Warehouse[0].Order)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Warehouse[0].Quantity)
@@ -22,18 +40,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Warehouse) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Order.Material.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Unit)
-            </td>            
-        </tr>
-}
+        @foreach (var item in Model.Warehouse)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.Material.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Warehouse.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Warehouse.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Warehouse.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Предыдущая
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Warehouse.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Следующая
+</a>
