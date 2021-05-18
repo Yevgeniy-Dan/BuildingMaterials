@@ -19,6 +19,11 @@ namespace BuildingMaterials.Models
         [Display(Name = "Единица измерения")]
         public string Unit { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Дата доставки")]
+        public DateTime DeliveryDate { get; set; }
+
         [Display(Name = "Наименование")]
         public Order Order { get; set; }
     }

@@ -79,7 +79,8 @@ namespace BuildingMaterials.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderID = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    Unit = table.Column<string>(nullable: true)
+                    Unit = table.Column<string>(nullable: true),
+                    DeliveryDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

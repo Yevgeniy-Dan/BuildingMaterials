@@ -125,6 +125,9 @@ namespace BuildingMaterials.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DeliveryDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("OrderID")
                         .HasColumnType("int");
 

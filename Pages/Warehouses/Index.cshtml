@@ -28,7 +28,7 @@
         <tr>
             <th>
                 <a asp-page="./Index" , asp-route-currentFilter="@Model.CurrentFilter" , asp-route-sortMaterial="@Model.NameSort">
-                    @Html.DisplayNameFor(model => model.Warehouse[0].Order)
+                    @Html.DisplayNameFor(model => model.Warehouse[0].OrderID)
                 </a>
             </th>
             <th>
@@ -37,22 +37,31 @@
             <th>
                 @Html.DisplayNameFor(model => model.Warehouse[0].Unit)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Warehouse[0].DeliveryDate)
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Warehouse)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Order.Material.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Unit)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.Material.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.DeliveryDate)
+            </td>
+            <td>
+                <a asp-page="./Delete" asp-route-id="@item.ID">Удалить</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

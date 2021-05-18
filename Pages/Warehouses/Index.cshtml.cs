@@ -24,8 +24,35 @@ namespace BuildingMaterials.Pages.Warehouses
 
         public PaginatedList<Warehouse> Warehouse { get; set; }
 
+
         public async Task OnGetAsync(string sortMaterial, string currentFilter, string searchString, int? pageIndex)
         {
+
+            /*В день доставки перенести материал с сущности 'Orders' в 'Warehouse'*/
+            IQueryable<Order> orderIQ = from o in _context.Orders
+                                        select o;
+
+            IQueryable<Warehouse> warehouseItems = from w in _context.Warehouses
+                                                   select w;
+
+            foreach (var order in orderIQ)
+            {
+                var check = warehouseItems.Where(w => w.OrderID == order.ID).FirstOrDefault();
+                if (order.DeliveryDate <= DateTime.Now && check == null) //если материал доставлен и его еще нет на складе (в сущности 'Waraehouse')
+                {
+                    var warehouseItem = new Warehouse
+                    {
+                        OrderID = order.ID,
+                        DeliveryDate = order.DeliveryDate,
+                        Quantity = order.Quantity,
+                        Unit = order.Unit
+                    };
+                    _context.Warehouses.Add(warehouseItem);
+                }
+            }
+
+            _context.SaveChanges();
+
             CurrentSort = sortMaterial;
             NameSort = string.IsNullOrEmpty(sortMaterial) ? "name_desc" : "";
             if (searchString != null)

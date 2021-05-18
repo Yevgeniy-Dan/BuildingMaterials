@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuildingMaterials.Migrations
 {
     [DbContext(typeof(BuildingMaterialsContext))]
-    [Migration("20210517130905_InitialCreate")]
+    [Migration("20210517132753_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,6 +126,9 @@ namespace BuildingMaterials.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DeliveryDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("OrderID")
                         .HasColumnType("int");

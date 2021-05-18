@@ -101,13 +101,13 @@ namespace BuildingMaterials.Data
 
             var warehouseItems = new Warehouse[]
             {
-                new Warehouse{OrderID=orders.Single(o=>o.ID==1).ID, Quantity = 31, Unit = "кг"},
-                
-                new Warehouse{OrderID=orders.Single(o=>o.ID==2).ID, Quantity = 32, Unit = "палет"},
+                new Warehouse{OrderID=orders.Single(o=>o.ID==1).ID, Quantity = 31, Unit = "кг", DeliveryDate = orders.Single(o=>o.ID==1).DeliveryDate},
 
-                new Warehouse{OrderID=orders.Single(o=>o.ID==3).ID, Quantity = 33, Unit = "шт"},
+                new Warehouse{OrderID=orders.Single(o=>o.ID==2).ID, Quantity = 32, Unit = "палет", DeliveryDate = orders.Single(o=>o.ID==2).DeliveryDate},
 
-                new Warehouse{OrderID=orders.Single(o=>o.ID==4).ID, Quantity = 34, Unit = "л"}
+                new Warehouse{OrderID=orders.Single(o=>o.ID==3).ID, Quantity = 33, Unit = "шт", DeliveryDate = orders.Single(o=>o.ID==3).DeliveryDate},
+
+                new Warehouse{OrderID=orders.Single(o=>o.ID==4).ID, Quantity = 34, Unit = "л", DeliveryDate = orders.Single(o=>o.ID==4).DeliveryDate}
             };
             context.Warehouses.AddRange(warehouseItems);
             context.SaveChanges();
