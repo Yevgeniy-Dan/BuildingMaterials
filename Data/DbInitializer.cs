@@ -101,15 +101,59 @@ namespace BuildingMaterials.Data
 
             var warehouseItems = new Warehouse[]
             {
-                new Warehouse{OrderID=orders.Single(o=>o.ID==1).ID, Quantity = 31, Unit = "кг", DeliveryDate = orders.Single(o=>o.ID==1).DeliveryDate},
+                new Warehouse{OrderID=orders.Single(o=>o.ID==1).ID, Quantity = 1300, Unit = "кг", DeliveryDate = orders.Single(o=>o.ID==1).DeliveryDate},
 
-                new Warehouse{OrderID=orders.Single(o=>o.ID==2).ID, Quantity = 32, Unit = "палет", DeliveryDate = orders.Single(o=>o.ID==2).DeliveryDate},
+                new Warehouse{OrderID=orders.Single(o=>o.ID==2).ID, Quantity = 1000, Unit = "палет", DeliveryDate = orders.Single(o=>o.ID==2).DeliveryDate},
 
-                new Warehouse{OrderID=orders.Single(o=>o.ID==3).ID, Quantity = 33, Unit = "шт", DeliveryDate = orders.Single(o=>o.ID==3).DeliveryDate},
+                new Warehouse{OrderID=orders.Single(o=>o.ID==3).ID, Quantity = 15000, Unit = "шт", DeliveryDate = orders.Single(o=>o.ID==3).DeliveryDate},
 
-                new Warehouse{OrderID=orders.Single(o=>o.ID==4).ID, Quantity = 34, Unit = "л", DeliveryDate = orders.Single(o=>o.ID==4).DeliveryDate}
+                new Warehouse{OrderID=orders.Single(o=>o.ID==4).ID, Quantity = 3000, Unit = "л", DeliveryDate = orders.Single(o=>o.ID==4).DeliveryDate}
             };
             context.Warehouses.AddRange(warehouseItems);
+            context.SaveChanges();
+
+            var facilities = new Facility[]
+            {
+                new Facility{Name = "Детский сад", Address = "ул. Докучаева, 52", Phone = "(+380) 97 187 9845"},
+
+                new Facility{Name = "Горисполком", Address = "пр-кт Мира, 152", Phone = "(+380) 97 183 4323"},
+                new Facility{Name = "Power Town", Address = "пр-кт Мира, 173", Phone = "(+380) 97 187 8934"},
+            };
+            context.Facilities.AddRange(facilities);
+            context.SaveChanges();
+
+            var registrasions = new Registration[]
+            {
+                new Registration{FacilityID = 
+                facilities.Single(f=>f.Name == "Детский сад").ID, 
+                    WarehouseID = warehouseItems.Single(w => w.OrderID == 2).ID, 
+                    Quantity = 300, 
+                    Unit = warehouseItems.Single(w=>w.OrderID==2).Unit, 
+                    linkEstimate = "https://dummy-link.com"},
+
+                new Registration{FacilityID = 
+                facilities.Single(f=>f.Name == "Детский сад").ID, 
+                    WarehouseID = warehouseItems.Single(w => w.OrderID == 1).ID,
+                    Quantity = 1300,
+                    Unit = warehouseItems.Single(w=>w.OrderID==1).Unit,
+                    linkEstimate = "https://dummy-link.com"},
+
+                new Registration{FacilityID = 
+                facilities.Single(f=>f.Name == "Детский сад").ID, 
+                    WarehouseID = warehouseItems.Single(w => w.OrderID == 5).ID,
+                    Quantity = 1400,
+                    Unit = warehouseItems.Single(w=>w.OrderID==5).Unit,
+                    linkEstimate = "https://dummy-link.com"},
+
+                new Registration{FacilityID = 
+                facilities.Single(f=>f.Name == "Детский сад").ID, 
+                    WarehouseID = warehouseItems.Single(w => w.OrderID == 6).ID,
+                    Quantity = 560,
+                    Unit = warehouseItems.Single(w=>w.OrderID==6).Unit,
+                    linkEstimate = "https://dummy-link.com"}
+            };
+
+            context.Registrations.AddRange(registrasions);
             context.SaveChanges();
         }
     }

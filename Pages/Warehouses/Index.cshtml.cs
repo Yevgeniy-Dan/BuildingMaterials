@@ -34,7 +34,7 @@ namespace BuildingMaterials.Pages.Warehouses
 
             IQueryable<Warehouse> warehouseItems = from w in _context.Warehouses
                                                    select w;
-
+            _context.Warehouses.RemoveRange(warehouseItems);
             foreach (var order in orderIQ)
             {
                 var check = warehouseItems.Where(w => w.OrderID == order.ID).FirstOrDefault();

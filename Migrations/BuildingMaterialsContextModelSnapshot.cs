@@ -19,6 +19,37 @@ namespace BuildingMaterials.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("BuildingMaterials.Models.Facility", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<int?>("MaterialID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("MaterialID");
+
+                    b.ToTable("Facility");
+                });
+
             modelBuilder.Entity("BuildingMaterials.Models.Material", b =>
                 {
                     b.Property<int>("ID")
@@ -88,6 +119,37 @@ namespace BuildingMaterials.Migrations
                     b.ToTable("Order");
                 });
 
+            modelBuilder.Entity("BuildingMaterials.Models.Registration", b =>
+                {
+                    b.Property<int>("RegistrationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FacilityID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WarehouseID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("linkEstimate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RegistrationID");
+
+                    b.HasIndex("FacilityID");
+
+                    b.HasIndex("WarehouseID");
+
+                    b.ToTable("Registration");
+                });
+
             modelBuilder.Entity("BuildingMaterials.Models.Supplier", b =>
                 {
                     b.Property<int>("ID")
@@ -145,6 +207,13 @@ namespace BuildingMaterials.Migrations
                     b.ToTable("Warehouse");
                 });
 
+            modelBuilder.Entity("BuildingMaterials.Models.Facility", b =>
+                {
+                    b.HasOne("BuildingMaterials.Models.Material", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("MaterialID");
+                });
+
             modelBuilder.Entity("BuildingMaterials.Models.Material", b =>
                 {
                     b.HasOne("BuildingMaterials.Models.Supplier", "Supplier")
@@ -157,8 +226,23 @@ namespace BuildingMaterials.Migrations
             modelBuilder.Entity("BuildingMaterials.Models.Order", b =>
                 {
                     b.HasOne("BuildingMaterials.Models.Material", "Material")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("MaterialID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BuildingMaterials.Models.Registration", b =>
+                {
+                    b.HasOne("BuildingMaterials.Models.Facility", "Facility")
+                        .WithMany("Registrations")
+                        .HasForeignKey("FacilityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BuildingMaterials.Models.Warehouse", "Warehouse")
+                        .WithMany("Registrations")
+                        .HasForeignKey("WarehouseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -40,7 +40,7 @@ namespace BuildingMaterials.Models
         [Range(1, int.MaxValue, ErrorMessage = "Пожалуйста, введите значние больше 0")]
         public int? ShelfLife { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Facility> Orders { get; set; }
         [Display(Name = "Поставщик")]
         public Supplier Supplier { get; set; }
     }

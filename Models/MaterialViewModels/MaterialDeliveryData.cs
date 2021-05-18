@@ -8,6 +8,6 @@ namespace BuildingMaterials.Models.MaterialViewModels
     public class MaterialDeliveryData
     {
         public IEnumerable<Material> Materials { get; set; }
-        public IEnumerable<Order> Orders { get; set; }
+        public IEnumerable<Facility> Orders { get; set; }
     }
 }

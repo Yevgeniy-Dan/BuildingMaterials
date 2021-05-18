@@ -48,6 +48,28 @@ namespace BuildingMaterials.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Facility",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Address = table.Column<string>(maxLength: 100, nullable: false),
+                    Phone = table.Column<string>(nullable: false),
+                    MaterialID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Facility", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Facility_Material_MaterialID",
+                        column: x => x.MaterialID,
+                        principalTable: "Material",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
                 {
@@ -93,6 +115,40 @@ namespace BuildingMaterials.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Registration",
+                columns: table => new
+                {
+                    RegistrationID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FacilityID = table.Column<int>(nullable: false),
+                    WarehouseID = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    Unit = table.Column<string>(nullable: true),
+                    linkEstimate = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Registration", x => x.RegistrationID);
+                    table.ForeignKey(
+                        name: "FK_Registration_Facility_FacilityID",
+                        column: x => x.FacilityID,
+                        principalTable: "Facility",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Registration_Warehouse_WarehouseID",
+                        column: x => x.WarehouseID,
+                        principalTable: "Warehouse",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Facility_MaterialID",
+                table: "Facility",
+                column: "MaterialID");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Material_SupplierID",
                 table: "Material",
@@ -104,6 +160,16 @@ namespace BuildingMaterials.Migrations
                 column: "MaterialID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Registration_FacilityID",
+                table: "Registration",
+                column: "FacilityID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Registration_WarehouseID",
+                table: "Registration",
+                column: "WarehouseID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Warehouse_OrderID",
                 table: "Warehouse",
                 column: "OrderID",
@@ -112,6 +178,12 @@ namespace BuildingMaterials.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Registration");
+
+            migrationBuilder.DropTable(
+                name: "Facility");
+
             migrationBuilder.DropTable(
                 name: "Warehouse");
 

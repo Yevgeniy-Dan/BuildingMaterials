@@ -18,6 +18,8 @@ namespace BuildingMaterials.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
+        public DbSet<Facility> Facilities { get; set; }
+        public DbSet<Registration> Registrations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +27,9 @@ namespace BuildingMaterials.Data
             modelBuilder.Entity<Material>().ToTable("Material");
             modelBuilder.Entity<Order>().ToTable("Order");
             modelBuilder.Entity<Warehouse>().ToTable("Warehouse");
+            modelBuilder.Entity<Facility>().ToTable("Facility");
+            modelBuilder.Entity<Registration>().ToTable("Registration");
+
 
             //modelBuilder.Entity<Order>()
             //    .HasCheckConstraint("CHK_OrderMaterial", "CHECK (Quantity>=Order.Material.MinimumBatch)");

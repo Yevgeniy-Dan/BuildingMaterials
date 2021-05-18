@@ -26,5 +26,7 @@ namespace BuildingMaterials.Models
 
         [Display(Name = "Наименование")]
         public Order Order { get; set; }
+
+        public ICollection<Registration> Registrations { get; set; }
     }
 }
