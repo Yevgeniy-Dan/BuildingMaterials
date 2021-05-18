@@ -101,7 +101,7 @@ namespace BuildingMaterials.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderID = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    Unit = table.Column<string>(nullable: true),
+                    Unit = table.Column<string>(nullable: false),
                     DeliveryDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -124,8 +124,8 @@ namespace BuildingMaterials.Migrations
                     FacilityID = table.Column<int>(nullable: false),
                     WarehouseID = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    Unit = table.Column<string>(nullable: true),
-                    linkEstimate = table.Column<string>(nullable: true)
+                    Unit = table.Column<string>(nullable: false),
+                    RegistrationDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

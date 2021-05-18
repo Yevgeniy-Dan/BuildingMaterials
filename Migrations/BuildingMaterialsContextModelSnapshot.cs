@@ -132,14 +132,15 @@ namespace BuildingMaterials.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Unit")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("WarehouseID")
                         .HasColumnType("int");
-
-                    b.Property<string>("linkEstimate")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RegistrationID");
 
@@ -197,6 +198,7 @@ namespace BuildingMaterials.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Unit")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");

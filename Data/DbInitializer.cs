@@ -124,33 +124,54 @@ namespace BuildingMaterials.Data
 
             var registrasions = new Registration[]
             {
-                new Registration{FacilityID = 
-                facilities.Single(f=>f.Name == "Детский сад").ID, 
-                    WarehouseID = warehouseItems.Single(w => w.OrderID == 2).ID, 
-                    Quantity = 300, 
-                    Unit = warehouseItems.Single(w=>w.OrderID==2).Unit, 
-                    linkEstimate = "https://dummy-link.com"},
+                new Registration{
+                    FacilityID = facilities.Single(f => f.Name == "Детский сад").ID,
+                    WarehouseID = warehouseItems.Single(w => w.OrderID == 2).ID,
+                    Quantity = 300,
+                    Unit = warehouseItems.Single(w=>w.OrderID==2).Unit,
+                    RegistrationDate = DateTime.Parse("2021-05-18")},
 
-                new Registration{FacilityID = 
-                facilities.Single(f=>f.Name == "Детский сад").ID, 
+                new Registration{
+                    FacilityID = facilities.Single(f => f.Name == "Детский сад").ID,
                     WarehouseID = warehouseItems.Single(w => w.OrderID == 1).ID,
-                    Quantity = 1300,
+                    Quantity = 500,
                     Unit = warehouseItems.Single(w=>w.OrderID==1).Unit,
-                    linkEstimate = "https://dummy-link.com"},
+                    RegistrationDate = DateTime.Parse("2021-05-18")},
 
-                new Registration{FacilityID = 
-                facilities.Single(f=>f.Name == "Детский сад").ID, 
-                    WarehouseID = warehouseItems.Single(w => w.OrderID == 5).ID,
+                new Registration{
+                    FacilityID = facilities.Single(f=>f.Name == "Горисполком").ID,
+                    WarehouseID = warehouseItems.Single(w => w.OrderID == 2).ID,
                     Quantity = 1400,
-                    Unit = warehouseItems.Single(w=>w.OrderID==5).Unit,
-                    linkEstimate = "https://dummy-link.com"},
+                    Unit = warehouseItems.Single(w=>w.OrderID==2).Unit,
+                    RegistrationDate = DateTime.Parse("2021-05-18")},
 
-                new Registration{FacilityID = 
-                facilities.Single(f=>f.Name == "Детский сад").ID, 
-                    WarehouseID = warehouseItems.Single(w => w.OrderID == 6).ID,
+                new Registration{
+                    FacilityID = facilities.Single(f=>f.Name == "Power Town").ID,
+                    WarehouseID = warehouseItems.Single(w => w.OrderID == 1).ID,
                     Quantity = 560,
-                    Unit = warehouseItems.Single(w=>w.OrderID==6).Unit,
-                    linkEstimate = "https://dummy-link.com"}
+                    Unit = warehouseItems.Single(w=>w.OrderID==1).Unit,
+                    RegistrationDate = DateTime.Parse("2021-05-18")},
+
+                 new Registration{
+                    FacilityID = facilities.Single(f=>f.Name == "Power Town").ID,
+                    WarehouseID = warehouseItems.Single(w => w.OrderID == 4).ID,
+                    Quantity = 60,
+                    Unit = warehouseItems.Single(w=>w.OrderID==4).Unit,
+                    RegistrationDate = DateTime.Parse("2021-05-18")},
+
+                  new Registration{
+                    FacilityID = facilities.Single(f=>f.Name == "Power Town").ID,
+                    WarehouseID = warehouseItems.Single(w => w.OrderID == 1).ID,
+                    Quantity = 350,
+                    Unit = warehouseItems.Single(w=>w.OrderID==1).Unit,
+                    RegistrationDate = DateTime.Parse("2021-05-18")},
+
+                   new Registration{
+                    FacilityID = facilities.Single(f=>f.Name == "Power Town").ID,
+                    WarehouseID = warehouseItems.Single(w => w.OrderID == 2).ID,
+                    Quantity = 100,
+                    Unit = warehouseItems.Single(w=>w.OrderID==2).Unit,
+                    RegistrationDate = DateTime.Parse("2021-05-18")}
             };
 
             context.Registrations.AddRange(registrasions);

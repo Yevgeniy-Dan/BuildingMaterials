@@ -24,6 +24,7 @@ namespace BuildingMaterials.Models
         [Display(Name = "Номер телефона")]
         public string Phone { get; set; }
 
+        [Display(Name = "Смета")]
         public ICollection<Registration> Registrations { get; set; }
     }
 }

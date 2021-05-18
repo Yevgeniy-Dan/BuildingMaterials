@@ -1,0 +1,60 @@
+﻿@page
+@model BuildingMaterials.Pages.Registrations.IndexModel
+
+@{
+    ViewData["Title"] = "Регистрация материала";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Создать</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Registration[0].Warehouse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Registration[0].Facility)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Registration[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Registration[0].Unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Registration[0].RegistrationDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Registration) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Warehouse.Order.Material.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Facility.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.RegistrationID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.RegistrationID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.RegistrationID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

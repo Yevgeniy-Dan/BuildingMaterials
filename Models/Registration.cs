@@ -10,18 +10,31 @@ namespace BuildingMaterials.Models
     {
         public int RegistrationID { get; set; }
 
+        [Display(Name = "Объект")]
         public int FacilityID { get; set; }
 
+        [Display(Name = "Материал")]
         public int WarehouseID { get; set; }
 
+        [Required(ErrorMessage = "Это поле обязательно для заполнения")]
         [Display(Name = "Количество")]
+        [Range(1, int.MaxValue, ErrorMessage = "Пожалуйста, введите значние больше 0")]
         public int Quantity { get; set; }
+
+        [Required(ErrorMessage = "Это поле обязательно для заполнения")]
         [Display(Name = "Единица измерения")]
         public string Unit { get; set; }
 
-        public string linkEstimate { get; set; }
+        [Required(ErrorMessage = "Это поле обязательно для заполнения")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Дата регистрации")]
+        public DateTime RegistrationDate { get; set; }
 
+        [Display(Name = "Объект")]
         public Facility Facility { get; set; }
+
+        [Display(Name = "Материал")]
         public Warehouse Warehouse { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuildingMaterials.Migrations
 {
     [DbContext(typeof(BuildingMaterialsContext))]
-    [Migration("20210518080731_InitialCreate")]
+    [Migration("20210518090546_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,14 +134,15 @@ namespace BuildingMaterials.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Unit")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("WarehouseID")
                         .HasColumnType("int");
-
-                    b.Property<string>("linkEstimate")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RegistrationID");
 
@@ -199,6 +200,7 @@ namespace BuildingMaterials.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Unit")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
