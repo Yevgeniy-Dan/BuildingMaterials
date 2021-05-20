@@ -7,7 +7,7 @@
 
 <h1>Подробности</h1>
 
-<div>
+<div class="parentDiv">
     <h4>Объект</h4>
     <hr />
     <dl class="row">
@@ -54,11 +54,30 @@
                     </tr>
                 }
             </table>
-            <a href="#" class="btn btn-primary float-right">Скачать смету</a>
         </dd>
     </dl>
 </div>
+<a id="printPDF" href="#" class="btn btn-primary float-right">Скачать смету</a>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Facility.ID">Редактировать</a> |
     <a asp-page="./Index">Вернуться к списку</a>
 </div>
+
+@section scripts{
+    <script>
+
+        $("#printPDF").click(function () {
+            var element = document.querySelector('.parentDiv');
+            var opt = {
+                margin: 1,
+                filename: 'Estimate.pdf',
+                image: { type: 'png' },
+                html2canvas: { scale: 5 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                pagebreak: { mode: 'avoid-all', before: '#page2el' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        });
+    </script>
+}

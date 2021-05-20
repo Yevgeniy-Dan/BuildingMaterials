@@ -11,7 +11,7 @@ using BuildingMaterials.Models;
 
 namespace BuildingMaterials.Pages.Registrations
 {
-    public class EditModel : PageModel
+    public class EditModel : NamePageModel
     {
         private readonly BuildingMaterials.Data.BuildingMaterialsContext _context;
 
@@ -30,16 +30,15 @@ namespace BuildingMaterials.Pages.Registrations
                 return NotFound();
             }
 
-            Registration = await _context.Registrations
-                .Include(r => r.Facility)
-                .Include(r => r.Warehouse).FirstOrDefaultAsync(m => m.RegistrationID == id);
+            Registration = await _context.Registrations.FindAsync(id);
 
             if (Registration == null)
             {
                 return NotFound();
             }
-           ViewData["FacilityID"] = new SelectList(_context.Facilities, "ID", "Address");
-           ViewData["WarehouseID"] = new SelectList(_context.Warehouses, "ID", "ID");
+
+            PopulateMaterialDropDownList(_context);
+            PopulateFacilityDropDownList(_context);
             return Page();
         }
 

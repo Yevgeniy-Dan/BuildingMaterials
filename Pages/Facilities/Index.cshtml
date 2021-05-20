@@ -5,16 +5,34 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Объекты</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Создать новый</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="container">
+        <p>
+            <a asp-page="./Index">Вернуться к полному списку</a>
+        </p>
+        <div class="row">
+            <div class="form-action no-color, col-sm">
+                <p>
+                    Найти по наименованию:
+                    <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                    <input type="submit" name="Search" class="btn btn-primary" value="Поиск" />
+                </p>
+            </div>
+        </div>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Facility[0].Name)
+                <a asp-page="./Index" , asp-route-currentFilter="@Model.CurrentFilter" , asp-route-sortFacility="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.Facility[0].Name)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Facility[0].Address)
@@ -26,23 +44,44 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Facility) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Facility)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Редактировать</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Подробности</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Удалить</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Facility.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Facility.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Facility.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Предыдущая
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Facility.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Следующая
+</a>

@@ -47,7 +47,6 @@ namespace BuildingMaterials.Pages.Materials
             // Выбираем SupplierID, если TryUpdateModelAsync не работает.
             PopulateSuppliersDropDownList(_context, emptyMaterial.SupplierID);
             return Page();
-
         }
     }
 }

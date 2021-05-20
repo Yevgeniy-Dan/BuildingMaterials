@@ -5,23 +5,33 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Редактирование</h1>
 
-<h4>Registration</h4>
+<h4>Регистрация</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Registration.RegistrationID" />
+
             <div class="form-group">
-                <label asp-for="Registration.FacilityID" class="control-label"></label>
-                <select asp-for="Registration.FacilityID" class="form-control" asp-items="ViewBag.FacilityID"></select>
+                <label asp-for="Registration.Facility" class="control-label"></label>
+                <select asp-for="Registration.FacilityID" class="form-control" asp-items="@Model.FacilityNameFL">
+                    <option value="">
+                        -- Объект --
+                    </option>
+                </select>
                 <span asp-validation-for="Registration.FacilityID" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Registration.WarehouseID" class="control-label"></label>
-                <select asp-for="Registration.WarehouseID" class="form-control" asp-items="ViewBag.WarehouseID"></select>
+                <label asp-for="Registration.Warehouse" class="control-label"></label>
+                <select asp-for="Registration.WarehouseID" class="form-control" asp-items="@Model.MaterialNameML">
+                    <option value="">
+                        -- Выбрать материал --
+                    </option>
+                </select>
                 <span asp-validation-for="Registration.WarehouseID" class="text-danger"></span>
             </div>
             <div class="form-group">

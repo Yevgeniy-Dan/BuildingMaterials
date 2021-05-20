@@ -18,12 +18,49 @@ namespace BuildingMaterials.Pages.Facilities
         {
             _context = context;
         }
+        public string NameSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
-        public IList<Facility> Facility { get;set; }
+        public PaginatedList<Facility> Facility { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortFacility, string currentFilter, string searchString, int? pageIndex)
         {
-            Facility = await _context.Facilities.ToListAsync();
+
+            CurrentSort = sortFacility;
+            NameSort = string.IsNullOrEmpty(sortFacility) ? "name_desc" : "";
+
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            CurrentFilter = searchString;
+
+            IQueryable<Facility> facilityIQ = from f in _context.Facilities
+                                                select f;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                facilityIQ = facilityIQ.Where(o => o.Name.Contains(searchString));
+            }
+
+            switch (sortFacility)
+            {
+                case "name_desc":
+                    facilityIQ = facilityIQ.OrderByDescending(o => o.Name);
+                    break;
+                default:
+                    facilityIQ = facilityIQ.OrderBy(o => o.Name);
+                    break;
+            }
+
+            int pageSize = ConstantValues.pageSize;
+
+            Facility = await PaginatedList<Facility>.CreateAsync(facilityIQ, pageIndex ?? 1, pageSize);
         }
     }
 }

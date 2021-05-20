@@ -10,7 +10,7 @@ using BuildingMaterials.Models;
 
 namespace BuildingMaterials.Pages.Registrations
 {
-    public class CreateModel : PageModel
+    public class CreateModel : NamePageModel
     {
         private readonly BuildingMaterials.Data.BuildingMaterialsContext _context;
 
@@ -21,8 +21,8 @@ namespace BuildingMaterials.Pages.Registrations
 
         public IActionResult OnGet()
         {
-        ViewData["FacilityID"] = new SelectList(_context.Facilities, "ID", "Address");
-        ViewData["WarehouseID"] = new SelectList(_context.Warehouses, "ID", "ID");
+            PopulateMaterialDropDownList(_context);
+            PopulateFacilityDropDownList(_context);
             return Page();
         }
 
@@ -33,15 +33,19 @@ namespace BuildingMaterials.Pages.Registrations
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            var emptyRegistration = new Registration();
+
+            if (await TryUpdateModelAsync<Registration> (emptyRegistration, "registration", r => r.FacilityID, r => r.WarehouseID, r => r.Quantity, r => r.Unit, r => r.RegistrationDate))
             {
-                return Page();
+                _context.Registrations.Add(emptyRegistration);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
 
-            _context.Registrations.Add(Registration);
-            await _context.SaveChangesAsync();
+            PopulateFacilityDropDownList(_context, emptyRegistration.FacilityID);
+            PopulateMaterialDropDownList(_context, emptyRegistration.WarehouseID);
 
-            return RedirectToPage("./Index");
+            return Page();
         }
     }
 }

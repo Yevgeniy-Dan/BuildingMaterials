@@ -5,19 +5,40 @@
     ViewData["Title"] = "Регистрация материала";
 }
 
-<h1>Index</h1>
+<h1>Регистрация объектов</h1>
 
 <p>
     <a asp-page="Create">Создать</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="container">
+        <p>
+            <a asp-page="./Index">Вернуться к полному списку</a>
+        </p>
+        <div class="row">
+            <div class="form-action no-color, col-sm">
+                <p>
+                    Найти по наименованию:
+                    <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                    <input type="submit" name="Search" class="btn btn-primary" value="Поиск" />
+                </p>
+            </div>
+        </div>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Registration[0].Warehouse)
+                <a asp-page="./Index" , asp-route-currentFilter="@Model.CurrentFilter" , asp-route-sortRegistration="@Model.MaterialNameSort">
+                    @Html.DisplayNameFor(model => model.Registration[0].Warehouse)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Registration[0].Facility)
+                <a asp-page="./Index" , asp-route-currentFilter="@Model.CurrentFilter" , asp-route-sortRegistration="@Model.FacilityNameSort">
+                    @Html.DisplayNameFor(model => model.Registration[0].Facility)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Registration[0].Quantity)
@@ -32,29 +53,50 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Registration) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Warehouse.Order.Material.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Facility.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Unit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegistrationDate)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.RegistrationID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.RegistrationID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.RegistrationID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Registration)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Warehouse.Order.Material.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Facility.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationDate)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.RegistrationID">Редактировать</a> |
+                    <a asp-page="./Details" asp-route-id="@item.RegistrationID">Подробности</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.RegistrationID">Удалить</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Registration.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Registration.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Registration.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Предыдущая
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Registration.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Следующая
+</a>
