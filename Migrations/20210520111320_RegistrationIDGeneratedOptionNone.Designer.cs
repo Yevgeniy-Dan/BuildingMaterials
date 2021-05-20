@@ -4,14 +4,16 @@ using BuildingMaterials.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BuildingMaterials.Migrations
 {
     [DbContext(typeof(BuildingMaterialsContext))]
-    partial class BuildingMaterialsContextModelSnapshot : ModelSnapshot
+    [Migration("20210520111320_RegistrationIDGeneratedOptionNone")]
+    partial class RegistrationIDGeneratedOptionNone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,7 +138,6 @@ namespace BuildingMaterials.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Unit")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("WarehouseID")

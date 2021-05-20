@@ -5,13 +5,13 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Создать</h1>
 
-<h4>Registration</h4>
+<h4>Регистрация</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" name="createRegistration">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
@@ -22,7 +22,6 @@
                     </option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label asp-for="Registration.Warehouse" class="control-label"></label>
                 <select asp-for="Registration.WarehouseID" class="form-control" asp-items="@Model.MaterialNameML">
@@ -30,6 +29,7 @@
                         -- Выбрать материал --
                     </option>
                 </select>
+                <span asp-validation-for="Registration.WarehouseID" class="text-danger" />
             </div>
 
             <div class="form-group">
@@ -38,13 +38,14 @@
                 <span asp-validation-for="Registration.Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
+
                 <label asp-for="Registration.Unit" class="control-label"></label>
-                <input asp-for="Registration.Unit" class="form-control" />
+                <input asp-for="Registration.Unit" class="form-control" disabled />
                 <span asp-validation-for="Registration.Unit" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Registration.RegistrationDate" class="control-label"></label>
-                <input asp-for="Registration.RegistrationDate" class="form-control"/>
+                <input id="registrationDate" asp-for="Registration.RegistrationDate" class="form-control" disabled />
                 <span asp-validation-for="Registration.RegistrationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -55,9 +56,9 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Вернуться к списку</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}   
 }

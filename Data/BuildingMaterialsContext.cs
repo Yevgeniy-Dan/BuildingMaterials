@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BuildingMaterials.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BuildingMaterials.Data
 {
@@ -29,7 +30,6 @@ namespace BuildingMaterials.Data
             modelBuilder.Entity<Warehouse>().ToTable("Warehouse");
             modelBuilder.Entity<Facility>().ToTable("Facility");
             modelBuilder.Entity<Registration>().ToTable("Registration");
-
 
             //modelBuilder.Entity<Order>()
             //    .HasCheckConstraint("CHK_OrderMaterial", "CHECK (Quantity>=Order.Material.MinimumBatch)");

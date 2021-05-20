@@ -35,8 +35,26 @@ namespace BuildingMaterials.Pages.Registrations
         {
             var emptyRegistration = new Registration();
 
-            if (await TryUpdateModelAsync<Registration> (emptyRegistration, "registration", r => r.FacilityID, r => r.WarehouseID, r => r.Quantity, r => r.Unit, r => r.RegistrationDate))
+            if (await TryUpdateModelAsync<Registration>(
+                emptyRegistration, 
+                "registration",
+                 r => r.FacilityID, r => r.WarehouseID, r => r.Quantity, r => r.Unit, r => r.RegistrationDate))
             {
+                //Выбираем единицу измерения
+                var warehouseIQ = from w in _context.Warehouses
+                                  select w;
+
+                emptyRegistration.Unit = warehouseIQ.Single(w => w.ID == emptyRegistration.WarehouseID).Unit;
+
+                //Устанавливаем дату
+                emptyRegistration.RegistrationDate = DateTime.Now;
+
+                //Уменьшаем кол-во оставшегося товара на складе
+                var materialToUpdate = await _context.Warehouses.FindAsync(warehouseIQ.Single(w => w.ID == emptyRegistration.WarehouseID).ID);
+
+                materialToUpdate.Quantity -= emptyRegistration.Quantity;
+
+                //Сохранить изменения
                 _context.Registrations.Add(emptyRegistration);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");

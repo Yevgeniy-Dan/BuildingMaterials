@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace BuildingMaterials.Models
         [Range(1, int.MaxValue, ErrorMessage = "Пожалуйста, введите значние больше 0")]
         public int Quantity { get; set; }
 
-        [Required(ErrorMessage = "Это поле обязательно для заполнения")]
+        //[Required(ErrorMessage = "Это поле обязательно для заполнения")]
         [Display(Name = "Единица измерения")]
         public string Unit { get; set; }
 
