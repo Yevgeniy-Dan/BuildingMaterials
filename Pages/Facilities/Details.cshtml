@@ -73,8 +73,7 @@
                 filename: 'Estimate.pdf',
                 image: { type: 'png' },
                 html2canvas: { scale: 5 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-                pagebreak: { mode: 'avoid-all', before: '#page2el' }
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
             };
 
             html2pdf().set(opt).from(element).save();

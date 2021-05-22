@@ -72,7 +72,7 @@
                     @Html.DisplayFor(modelItem => item.RegistrationDate)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.RegistrationID">Редактировать</a> |
+                    @*<a asp-page="./Edit" asp-route-id="@item.RegistrationID">Редактировать</a> |*@
                     <a asp-page="./Details" asp-route-id="@item.RegistrationID">Подробности</a> |
                     <a asp-page="./Delete" asp-route-id="@item.RegistrationID">Удалить</a>
                 </td>
