@@ -2,7 +2,7 @@
 @model BuildingMaterials.Pages.Registrations.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Создать";
 }
 <link href="~/css/validate.css" rel="stylesheet" />
 <h1>Создать</h1>
@@ -36,6 +36,7 @@
             <div class="form-group">
                 <label asp-for="Registration.Quantity" class="control-label"></label>
                 <input asp-for="Registration.Quantity" class="form-control" />
+                <div class="errorMsgQty">@Model.ErrorMessage</div>
                 <span asp-validation-for="Registration.Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
