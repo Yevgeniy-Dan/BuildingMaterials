@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+<link href="~/css/validate.css" rel="stylesheet" />
 <h1>Создать</h1>
 
 <h4>Регистрация</h4>
@@ -14,6 +14,7 @@
         <form method="post" name="createRegistration">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <div class="errorMsgQty"></div>
             <div class="form-group">
                 <label asp-for="Registration.Facility" class="control-label"></label>
                 <select asp-for="Registration.FacilityID" class="form-control" asp-items="@Model.FacilityNameFL">
@@ -38,12 +39,6 @@
                 <span asp-validation-for="Registration.Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
-
-                <label asp-for="Registration.Unit" class="control-label"></label>
-                <input asp-for="Registration.Unit" class="form-control" disabled />
-                <span asp-validation-for="Registration.Unit" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Registration.RegistrationDate" class="control-label"></label>
                 <input id="registrationDate" asp-for="Registration.RegistrationDate" class="form-control" disabled />
                 <span asp-validation-for="Registration.RegistrationDate" class="text-danger"></span>
@@ -60,5 +55,9 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}   
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>        
+        let date = document.getElementById('registrationDate');
+        date.valueAsDate = new Date();
+    </script>
 }

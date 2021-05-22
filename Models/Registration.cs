@@ -9,6 +9,9 @@ namespace BuildingMaterials.Models
 {
     public class Registration
     {
+        
+        public string ErrorMessageQty { get; }
+
         public int RegistrationID { get; set; }
 
         [Display(Name = "Объект")]

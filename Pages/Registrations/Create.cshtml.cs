@@ -28,6 +28,7 @@ namespace BuildingMaterials.Pages.Registrations
 
         [BindProperty]
         public Registration Registration { get; set; }
+        public string ErrorMessage { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -53,7 +54,14 @@ namespace BuildingMaterials.Pages.Registrations
                 var materialToUpdate = await _context.Warehouses.FindAsync(warehouseIQ.Single(w => w.ID == emptyRegistration.WarehouseID).ID);
 
                 materialToUpdate.Quantity -= emptyRegistration.Quantity;
-
+                if (materialToUpdate.Quantity < 0)
+                {
+                    materialToUpdate.Quantity += emptyRegistration.Quantity;
+                    ErrorMessage = $"Введите кол-во, равное {materialToUpdate.Quantity} или меньше";
+                    PopulateMaterialDropDownList(_context);
+                    PopulateFacilityDropDownList(_context);
+                    return Page();
+                }
                 //Сохранить изменения
                 _context.Registrations.Add(emptyRegistration);
                 await _context.SaveChangesAsync();
