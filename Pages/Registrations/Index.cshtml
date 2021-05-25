@@ -2,10 +2,10 @@
 @model BuildingMaterials.Pages.Registrations.IndexModel
 
 @{
-    ViewData["Title"] = "Регистрация материала";
+    ViewData["Title"] = "Материалы на объект";
 }
 
-<h1>Регистрация объектов</h1>
+<h1>Учет материалов на объект</h1>
 
 <p>
     <a asp-page="Create">Создать</a>
@@ -73,8 +73,8 @@
                 </td>
                 <td>
                     @*<a asp-page="./Edit" asp-route-id="@item.RegistrationID">Редактировать</a> |*@
-                    <a asp-page="./Details" asp-route-id="@item.RegistrationID">Подробности</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.RegistrationID">Удалить</a>
+                    <a asp-page="./Details" asp-route-id="@item.RegistrationID">Подробности</a> @*|
+                    <a asp-page="./Delete" asp-route-id="@item.RegistrationID">Удалить</a>*@
                 </td>
             </tr>
         }

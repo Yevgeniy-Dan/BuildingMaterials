@@ -23,7 +23,7 @@ p {
     font-size: 1.2em;
 }
 
-#showcase {
+.showcase {
     background: url(../images/showcase.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -34,12 +34,18 @@ p {
     align-items: center;
     flex-direction: column;
     text-align: center;
+    position: relative;
+}
+
+.greeting {
+    animation: slideInFromTop 1s ease-in;
 }
 
 .boxes {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .box-1,
@@ -54,6 +60,14 @@ p {
     justify-content: center;
 }
 
+.box-1{
+    animation: slideInFromLeft 1s ease-in;
+}
+
+.box-2 {
+    animation: slideInFromRight 1s ease-in;
+}
+
 .box-text a {
     border: 1px solid #e56f1b;
     border-radius: 10px;
@@ -66,6 +80,48 @@ p {
     border: none;
     color: #e56f1b;
     background: #fff;
+}
+
+/* Animations */
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-200%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
 }
 
 @media (max-width: 1200px){
