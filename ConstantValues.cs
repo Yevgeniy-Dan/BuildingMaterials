@@ -7,6 +7,6 @@ namespace BuildingMaterials
 {
     public class ConstantValues
     {
-        public const int pageSize = 5; //кол-во записей из БД на одной странице
+        public const int pageSize = 10; //кол-во записей из БД на одной странице
     }
 }
