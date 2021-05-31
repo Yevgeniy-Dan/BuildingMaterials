@@ -85,32 +85,28 @@
                     @Html.DisplayFor(modelItem => item.AmountToPay)
                 </td>
                 <td>
-                    @*@if (item.Material.ShelfLife != null)
-                        {
-                            int shelfLife = (int)item.Material.ShelfLife;
-                            DateTime expiryDate = item.DeliveryDate.AddDays(shelfLife).Date;
-                            @if (expiryDate > DateTime.Now.Date)
-                            {
-                                <a asp-page="./Edit" asp-route-id="@item.ID">Редактировать |</a>
-                                <a asp-page="./Delete" asp-route-id="@item.ID">Удалить |</a>
-                            }
-                        }
-                        <a asp-page="./Details" asp-route-id="@item.ID">Подробности</a>*@
                     @if (item.Material.ShelfLife != null)
                     {
 
-                    @if (item.DeliveryDate > DateTime.Now.Date)
-                    {
-                        <a asp-page="./Edit" asp-route-id="@item.ID">Редактировать |</a>
-                        <a asp-page="./Delete" asp-route-id="@item.ID">Удалить |</a>
-                    }
+                        @if (item.DeliveryDate > DateTime.Now.Date)
+                        {
+                            <a asp-page="./Edit" asp-route-id="@item.ID">Редактировать |</a>
+                            @*<a asp-page="./Delete" asp-route-id="@item.ID">Удалить |</a>*@
+                        }
                     }
                     <a asp-page="./Details" asp-route-id="@item.ID">Подробности</a>
+                </td>
+                <td>
+                    @if (item.DeliveryDate <= DateTime.Now.Date)
+                    {
+                        <span class="badge bg-success p-md-3 text-white w-100 text-uppercase">Доставлен</span>
+                    }
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
 
 @{
     var prevDisabled = !Model.Orders.HasPreviousPage ? "disabled" : "";

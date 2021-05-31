@@ -50,7 +50,7 @@ namespace BuildingMaterials.Pages.Warehouses
                 }
             }
 
-            _context.SaveChanges();
+            _context.SaveChanges(); //сохраняем
 
             CurrentSort = sortMaterial;
             NameSort = string.IsNullOrEmpty(sortMaterial) ? "name_desc" : "";

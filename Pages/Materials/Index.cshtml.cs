@@ -48,8 +48,8 @@ namespace BuildingMaterials.Pages.Materials
                                                select m;
             IEnumerable<Order> orderIQ = from o in _context.Orders
                                          select o;
-            IQueryable<Material> unusedMaterialsIQ = from m in _context.Materials
-                                                     select m;
+
+            //создаем новый массив для неиспользованных материалов
             List<int> IDes = new List<int>();
 
             IsUnusedMaterial = unusedMaterials;
@@ -61,7 +61,7 @@ namespace BuildingMaterials.Pages.Materials
 
             if (IsUnusedMaterial)
             {
-                foreach (var order in orderIQ)
+                foreach (var order in orderIQ) //помещение всех заказов в новый массив
                 {
                     IDes.Add(order.MaterialID);
                 }

@@ -23,11 +23,11 @@
                 </select>
                 <span asp-validation-for="Order.MaterialID" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <label asp-for="Order.Quantity" class="control-label"></label>
-                <input  asp-for="Order.Quantity" class="form-control" />
-                <span  asp-validation-for="Order.Quantity" class="text-danger"></span>
+                <input asp-for="Order.Quantity" class="form-control" />
+                <span asp-validation-for="Order.Quantity" class="text-danger"></span>
                 <label><font color="red">@Model.QuantityValidate</font></label>
             </div>
             <div class="form-group">
@@ -42,7 +42,7 @@
                 <label><font color="red">@Model.DateValidate</font></label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary" />  
             </div>
         </form>
     </div>

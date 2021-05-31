@@ -27,7 +27,7 @@ namespace BuildingMaterials.Pages.Registrations
 
         public async Task OnGetAsync(string sortRegistration, string currentFilter, string searchString, int? pageIndex)
         {
-            CurrentSort = sortRegistration;
+            CurrentSort = currentFilter;
             MaterialNameSort = string.IsNullOrEmpty(sortRegistration) ? "name_desc" : "";
             FacilityNameSort = sortRegistration == "Facility" ? "fac_desc" : "Facility";
 

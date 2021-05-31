@@ -18,12 +18,12 @@ namespace BuildingMaterials.Pages.Orders
         {
             _context = context;
         }
-
         public string NameSort { get; set; }
         public string CurrentFilter { get; set; }
         public string DateCurrentFilter { get; set; }
         public string CurrentSort { get; set; }
-        public bool IsExpired { get; set; } = false;
+
+        //public bool IsDelivered { get; set; } = false;
 
         public PaginatedList<Order> Orders { get; set; }
 
@@ -47,10 +47,14 @@ namespace BuildingMaterials.Pages.Orders
                                          select o;
             IQueryable<Material> materialsIQ = from m in _context.Materials
                                                select m;
+            // проход по всем заказам
             foreach (var order in ordersIQ)
             {
+                // ищем материал с текущим orderID
                 Material material = materialsIQ.Where(m => m.ID == order.MaterialID).Single();
+                // вычисляем стоимость заказа, умножив кол-во на стоимость  за единицу
                 order.Cost = order.Quantity * material.UnitCost;
+                // высчитываем счет к оплате с учетов НДС 20%
                 order.AmountToPay = (order.Cost / 100 * 20) + order.Cost;
             }
 
@@ -78,5 +82,11 @@ namespace BuildingMaterials.Pages.Orders
             Orders = await PaginatedList<Order>.CreateAsync(ordersIQ
                 .Include(o => o.Material), pageIndex ?? 1, pageSize);
         }
+
+        //public void BtnDelivered_Click()
+        //{
+        //    IQueryable<Order> ordersIQ = from o in _context.Orders
+        //                                 select o;
+        //}
     }
 }
