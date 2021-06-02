@@ -17,7 +17,7 @@ namespace BuildingMaterials.Models
 
         [Required(ErrorMessage = "Это поле обязательно для заполнения")]
         [Display(Name = "Количество")]
-        [Range(1, int.MaxValue, ErrorMessage = "Пожалуйста, введите значние больше 0")]
+        [Range(1, int.MaxValue, ErrorMessage = "Пожалуйста, введите значение больше 0")]
         public int Quantity { get; set; }
 
         [Required(ErrorMessage = "Это поле обязательно для заполнения")]

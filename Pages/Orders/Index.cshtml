@@ -91,7 +91,6 @@
                         @if (item.DeliveryDate > DateTime.Now.Date)
                         {
                             <a asp-page="./Edit" asp-route-id="@item.ID">Редактировать |</a>
-                            @*<a asp-page="./Delete" asp-route-id="@item.ID">Удалить |</a>*@
                         }
                     }
                     <a asp-page="./Details" asp-route-id="@item.ID">Подробности</a>

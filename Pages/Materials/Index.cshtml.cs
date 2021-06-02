@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BuildingMaterials.Data;
 using BuildingMaterials.Models;
-using BuildingMaterials.Models.MaterialViewModels;
 
 namespace BuildingMaterials.Pages.Materials
 {
@@ -65,11 +64,9 @@ namespace BuildingMaterials.Pages.Materials
                 {
                     IDes.Add(order.MaterialID);
                 }
-                foreach (var order in IDes)
+                foreach (var materialID in IDes)
                 {
-                    var id = _context.Materials.FirstOrDefault(m => m.ID == order).ID;
-
-                    materialsIQ = materialsIQ.Where(m => m.ID != order);
+                    materialsIQ = materialsIQ.Where(m => m.ID != materialID);
                 }
             }
 
